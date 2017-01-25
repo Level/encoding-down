@@ -1,0 +1,18 @@
+{
+  "name": "encoding-down",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": "level/encoding-down",
+  "description": "LevelDOWN wrapper supporting levelup@1 encodings",
+  "scripts": {
+    "test": "standard"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0",
+    "tape": "^4.6.3"
+  },
+  "dependencies": {
+    "abstract-leveldown": "^2.6.1",
+    "level-codec": "^6.2.0"
+  }
+}
