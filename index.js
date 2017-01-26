@@ -11,6 +11,11 @@ module.exports = DB
 function DB (db, opts) {
   if (!(this instanceof DB)) return new DB(db, opts)
   AbstractLevelDOWN.call(this, '')
+
+  opts = opts || {}
+  if (typeof opts.keyEncoding === 'undefined') opts.keyEncoding = 'utf8'
+  if (typeof opts.valueEncoding === 'undefined') opts.valueEncoding = 'utf8'
+
   this.db = db
   this.codec = new Codec(opts)
 }
