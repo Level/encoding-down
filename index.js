@@ -22,7 +22,7 @@ DB.prototype._open = function (opts, cb) {
 }
 
 DB.prototype._close = function (cb) {
-  this.db.close(opts, cb)
+  this.db.close(cb)
 }
 
 DB.prototype._put = function (key, value, opts, cb) {
@@ -93,7 +93,7 @@ function Batch (db, codec) {
   this.batch = db.batch()
 }
 
-inherits(batch, AbstractChainedBatch)
+inherits(Batch, AbstractChainedBatch)
 
 Batch.prototype._put = function (key, value) {
   key = this.codec.encodeKey(key)
