@@ -64,6 +64,10 @@ DB.prototype._iterator = function (opts) {
   return new Iterator(this, opts)
 }
 
+DB.prototype.approximateSize = function (start, end, opts, cb) {
+  return this.db.approximateSize(start, end, opts, cb)
+}
+
 function Iterator (db, opts) {
   AbstractIterator.call(this, db)
   this.codec = db.codec
