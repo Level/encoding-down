@@ -23,8 +23,8 @@ function DB (db, opts) {
 
 inherits(DB, AbstractLevelDOWN)
 
-DB.prototype._encodeKey =
-DB.prototype._encodeValue = function (datum) {
+DB.prototype._serializeKey =
+DB.prototype._serializeValue = function (datum) {
   return datum
 }
 
