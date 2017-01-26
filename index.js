@@ -23,6 +23,11 @@ function DB (db, opts) {
 
 inherits(DB, AbstractLevelDOWN)
 
+DB.prototype._encodeKey =
+DB.prototype._encodeValue = function (datum) {
+  return datum
+}
+
 DB.prototype._open = function (opts, cb) {
   this.db.open(opts, cb)
 }
