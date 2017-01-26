@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "abstract-leveldown": "^2.6.1",
-    "level-codec": "^6.2.0"
+    "level-codec": "^7.0.0"
   }
 }
