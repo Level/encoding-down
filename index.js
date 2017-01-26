@@ -5,6 +5,7 @@ var AbstractChainedBatch = require('abstract-leveldown').AbstractChainedBatch
 var AbstractIterator = require('abstract-leveldown').AbstractIterator
 var inherits = require('util').inherits
 var Codec = require('level-codec')
+var EncodingError = require('level-errors').EncodingError
 
 module.exports = DB
 
@@ -41,7 +42,11 @@ DB.prototype._get = function (key, opts, cb) {
   key = this.codec.encodeKey(key, opts)
   this.db.get(key, opts, function (err, value) {
     if (err) return cb(err)
-    value = self.codec.decodeValue(value, opts)
+    try {
+      value = self.codec.decodeValue(value, opts)
+    } catch (err) {
+      return cb(new EncodingError(err))
+    }
     cb(null, value)
   })
 }
