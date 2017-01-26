@@ -67,8 +67,8 @@ DB.prototype._iterator = function (opts) {
 function Iterator (db, opts) {
   AbstractIterator.call(this, db)
   this.codec = db.codec
-  this.it = db.db.iterator(opts)
-  this.opts = opts
+  this.opts = this.codec.encodeLtgt(opts)
+  this.it = db.db.iterator(this.opts)
 }
 
 inherits(Iterator, AbstractIterator)
@@ -89,11 +89,6 @@ Iterator.prototype._next = function (cb) {
 
 Iterator.prototype._end = function (cb) {
   this.it.end(cb)
-}
-
-Iterator.prototype.seek = function (target) {
-  target = this.codec.encodeKey(target, this.opts)
-  this.it.seek(target)
 }
 
 function Batch (db, codec) {
