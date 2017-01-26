@@ -62,7 +62,7 @@ DB.prototype._iterator = function (opts) {
 function Iterator (db, opts) {
   AbstractIterator.call(this, db)
   this.codec = db.codec
-  this.it = db.iterator(opts)
+  this.it = db.db.iterator(opts)
   this.opts = opts
 }
 
