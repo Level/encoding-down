@@ -72,8 +72,12 @@ Iterator.prototype._next = function (cb) {
   var self = this
   this.it.next(function (err, key, value) {
     if (err) return cb(err)
-    key = self.codec.decodeKey(key, self.opts)
-    value = self.codec.decodeValue(value, self.opts)
+    if (typeof key !== 'undefined') {
+      key = self.codec.decodeKey(key, self.opts)
+    }
+    if (typof value !== 'undefined') {
+      value = self.codec.decodeValue(value, self.opts)
+    }
     cb(null, key, value)
   })
 }
