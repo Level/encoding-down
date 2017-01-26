@@ -12,7 +12,7 @@ function DB (db, opts) {
   if (!(this instanceof DB)) return new DB(db, opts)
   AbstractLevelDOWN.call(this, '')
   this.db = db
-  this.codec = Codec(opts)
+  this.codec = new Codec(opts)
 }
 
 inherits(DB, AbstractLevelDOWN)
@@ -90,7 +90,7 @@ Iterator.prototype.seek = function (target) {
 function Batch (db, codec) {
   AbstractChainedBatch.call(this, db)
   this.codec = db.codec
-  this.batch = db.batch()
+  this.batch = db.db.batch()
 }
 
 inherits(Batch, AbstractChainedBatch)
