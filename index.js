@@ -75,7 +75,7 @@ Iterator.prototype._next = function (cb) {
     if (typeof key !== 'undefined') {
       key = self.codec.decodeKey(key, self.opts)
     }
-    if (typof value !== 'undefined') {
+    if (typeof value !== 'undefined') {
       value = self.codec.decodeValue(value, self.opts)
     }
     cb(null, key, value)
