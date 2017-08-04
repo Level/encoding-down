@@ -21,7 +21,6 @@ db.put('name', 'encoding-down', function (err) {
 ### `var db = require('encoding-down')(db[, options])`
 
 * `db` `AbstractLevelDOWN` compatible db such as `leveldown`, `memdown` etc
-* `options`
 * `options.keyEncoding` (string) defaults to `'utf8'`
 * `options.valueEncoding` (string) defaults to `'utf8'`
 
