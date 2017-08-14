@@ -8,7 +8,7 @@
     "test": "standard"
   },
   "devDependencies": {
-    "standard": "^8.6.0",
+    "standard": "^10.0.3",
     "tape": "^4.6.3"
   },
   "dependencies": {
