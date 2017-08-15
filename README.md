@@ -1,6 +1,10 @@
-# encoding-down [![Build Status](https://travis-ci.org/Level/encoding-down.svg?branch=master)](https://travis-ci.org/Level/encoding-down)
+# encoding-down
+
+<img alt="LevelDB Logo" height="100" src="http://leveldb.org/img/logo.svg">
 
 [`AbstractLevelDOWN`](https://github.com/level/abstract-leveldown) wrapper supporting levelup@1 encodings. For motivation, see [this issue](https://github.com/Level/levelup/pull/367).
+
+[![Build Status](https://travis-ci.org/Level/encoding-down.svg?branch=master)](https://travis-ci.org/Level/encoding-down)
 
 ## Usage
 
