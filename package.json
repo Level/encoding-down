@@ -5,11 +5,13 @@
   "repository": "level/encoding-down",
   "description": "LevelDOWN wrapper supporting levelup@1 encodings",
   "scripts": {
-    "test": "standard"
+    "test": "standard && node test"
   },
   "devDependencies": {
+    "memdown": "^1.2.4",
+    "safe-buffer": "^5.1.1",
     "standard": "^10.0.3",
-    "tape": "^4.6.3"
+    "tape": "^4.8.0"
   },
   "dependencies": {
     "abstract-leveldown": "^2.6.1",
