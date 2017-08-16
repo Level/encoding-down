@@ -57,7 +57,7 @@ test('can decode from string to json', function (t) {
     var db2 = encdown(memdb, { valueEncoding: 'json' })
     db2.get('foo', function (err, value) {
       t.error(err, 'no error')
-      t.deepEqual(value, data, 'JSON.parse works')
+      t.deepEqual(value, data, 'JSON.parse')
       memdb.close(t.end.bind(t))
     })
   })
@@ -72,7 +72,7 @@ test('can decode from json to string', function (t) {
     var db2 = encdown(memdb, { valueEncoding: 'utf8' })
     db2.get('foo', function (err, value) {
       t.error(err, 'no error')
-      t.deepEqual(value, JSON.stringify(data), 'JSON.parse works')
+      t.deepEqual(value, JSON.stringify(data), 'JSON.stringify')
       memdb.close(t.end.bind(t))
     })
   })
