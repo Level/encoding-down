@@ -1,6 +1,7 @@
 var test = require('tape')
 var encdown = require('..')
 var memdown = require('memdown')
+var Buffer = require('safe-buffer').Buffer
 
 test('opens and closes the underlying db', function (t) {
   var _db = {
