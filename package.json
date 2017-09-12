@@ -4,6 +4,8 @@
   "license": "MIT",
   "repository": "level/encoding-down",
   "description": "LevelDOWN wrapper supporting levelup@1 encodings",
+  "main": "index.js",
+  "typings": "index.d.ts",
   "scripts": {
     "test": "standard && node test"
   },
