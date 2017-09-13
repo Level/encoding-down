@@ -7,21 +7,21 @@ declare namespace encoding {
 }
 
 declare function encoding<
-  TKey,
-  TValue,
-  TOptions,
-  TPutOptions,
-  TGetOptions,
-  TDeleteOptions,
-  TIteratorOptions,
-  TBatchOptions
+  TKey=any,
+  TValue=any,
+  TOptions=any,
+  TPutOptions=any,
+  TGetOptions=any,
+  TDeleteOptions=any,
+  TIteratorOptions=any,
+  TBatchOptions=any
   >(
   db: Abstract.LevelDOWN<TKey, TValue, TOptions, TPutOptions, TGetOptions, TDeleteOptions, TIteratorOptions, TBatchOptions>,
-  options?: TOptions & encoding.CodecOptions
+  options?: encoding.CodecOptions
   ): Abstract.LevelDOWN<
   TKey,
   TValue,
-  TOptions & encoding.CodecOptions,
+  TOptions,
   TPutOptions & encoding.CodecOptions,
   TGetOptions & encoding.CodecOptions,
   TDeleteOptions & encoding.CodecOptions,
