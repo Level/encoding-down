@@ -7,7 +7,7 @@ var inherits = require('util').inherits
 var Codec = require('level-codec')
 var EncodingError = require('level-errors').EncodingError
 
-module.exports = DB
+module.exports = DB.default = DB
 
 function DB (db, opts) {
   if (!(this instanceof DB)) return new DB(db, opts)
