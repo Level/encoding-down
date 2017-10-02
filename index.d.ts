@@ -1,31 +1,22 @@
-import * as Abstract from 'abstract-leveldown';
-import { CodecOptions as _CodecOptions, CodecEncoder as _CodecEncoder } from 'level-codec';
+import { AbstractLevelDOWN } from 'abstract-leveldown';
 
-declare namespace encoding {
-  export type CodecOptions = _CodecOptions;
-  export type CodecEncoder = _CodecEncoder;
+import { CodecOptions } from 'level-codec';
+export { CodecOptions, CodecEncoder } from 'level-codec';
+
+export interface EncodingDOWN<K=any, V=any, O={}, PO={}, GO={}, DO={}, IO={}, BO={}> extends AbstractLevelDOWN<
+  K, V, O, PO & CodecOptions, GO & CodecOptions, DO & CodecOptions, IO & CodecOptions, BO & CodecOptions> {
 }
 
-declare function encoding<
-  TKey=any,
-  TValue=any,
-  TOptions=any,
-  TPutOptions=any,
-  TGetOptions=any,
-  TDeleteOptions=any,
-  TIteratorOptions=any,
-  TBatchOptions=any
-  >(
-  db: Abstract.LevelDOWN<TKey, TValue, TOptions, TPutOptions, TGetOptions, TDeleteOptions, TIteratorOptions, TBatchOptions>,
-  options?: encoding.CodecOptions
-  ): Abstract.LevelDOWN<
-  TKey,
-  TValue,
-  TOptions,
-  TPutOptions & encoding.CodecOptions,
-  TGetOptions & encoding.CodecOptions,
-  TDeleteOptions & encoding.CodecOptions,
-  TIteratorOptions & encoding.CodecOptions,
-  TBatchOptions & encoding.CodecOptions>;
+interface EncodingDOWNConstructor {
+  <K=any, V=any, O={}, PO={}, GO={}, DO={}, IO={}, BO={}>(
+    db: AbstractLevelDOWN<any, any, O, PO, GO, DO, IO, BO>,
+    options?: CodecOptions
+  ): EncodingDOWN<K, V, O, PO, GO, DO, IO, BO>
+  new <K=any, V=any, O={}, PO={}, GO={}, DO={}, IO={}, BO={}>(
+    db: AbstractLevelDOWN<any, any, O, PO, GO, DO, IO, BO>,
+    options?: CodecOptions
+  ): EncodingDOWN<K, V, O, PO, GO, DO, IO, BO>
+}
 
-export = encoding;
+declare const EncodingDOWN: EncodingDOWNConstructor;
+export default EncodingDOWN;
