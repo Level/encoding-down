@@ -1,10 +1,13 @@
 # encoding-down
 
-<img alt="LevelDB Logo" height="100" src="http://leveldb.org/img/logo.svg">
+> [`abstract-leveldown`](https://github.com/level/abstract-leveldown) wrapper supporting levelup@1 encodings. For motivation, see [this issue](https://github.com/Level/levelup/pull/367).
 
-[`abstract-leveldown`](https://github.com/level/abstract-leveldown) wrapper supporting levelup@1 encodings. For motivation, see [this issue](https://github.com/Level/levelup/pull/367).
-
-[![Build Status](https://travis-ci.org/Level/encoding-down.svg?branch=master)](https://travis-ci.org/Level/encoding-down) [![Greenkeeper badge](https://badges.greenkeeper.io/Level/encoding-down.svg)](https://greenkeeper.io/)
+[![level badge][level-badge]](https://github.com/level/awesome)
+[![npm](https://img.shields.io/npm/v/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
+[![Travis](https://travis-ci.org/Level/encoding-down.svg?branch=master)](https://travis-ci.org/Level/encoding-down)
+[![david](https://david-dm.org/Level/encoding-down.svg)](https://david-dm.org/level/encoding-down)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![npm](https://img.shields.io/npm/dm/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
 
 ## Usage
 
@@ -12,6 +15,7 @@
 const levelup = require('levelup')
 const leveldown = require('leveldown')
 const encode = require('encoding-down')
+
 const db = levelup(encode(leveldown('./db')))
 db.put('name', 'encoding-down', function (err) {
   db.get('name', function (err, value) {
@@ -33,3 +37,5 @@ db.put('name', 'encoding-down', function (err) {
 ## License
 
 MIT
+
+[level-badge]: http://leveldb.org/img/badge.svg
