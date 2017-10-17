@@ -36,11 +36,11 @@ const levelup = require('levelup')
 const leveldown = require('leveldown')
 const encode = require('encoding-down')
 
-const db = levelup(encode(leveldown('./db')))
+const db = levelup(encode(leveldown('./db1')))
 
 db.put('example', Buffer.from('encoding-down'), function (err) {
   db.get('example', function (err, value) {
-    console.log(typeof value, value) // string encoding-down
+    console.log(typeof value, value) // 'string encoding-down'
   })
 })
 ```
@@ -48,11 +48,12 @@ db.put('example', Buffer.from('encoding-down'), function (err) {
 Can we store objects? Yes!
 
 ```js
-const db = levelup(encode(leveldown('./db'), { valueEncoding: 'json' }))
+const db = levelup(encode(leveldown('./db2'), { valueEncoding: 'json' }))
 
 db.put('example', { awesome: true }, function (err) {
   db.get('example', function (err, value) {
-    console.log(typeof value, value) // object { awesome: true }
+    console.log(value) // { awesome: true }
+    console.log(typeof value) // 'object'
   })
 })
 ```
@@ -60,11 +61,11 @@ db.put('example', { awesome: true }, function (err) {
 How about storing Buffers, but getting back a hex-encoded string?
 
 ```js
-const db = levelup(encode(leveldown('./db'), { valueEncoding: 'hex' }))
+const db = levelup(encode(leveldown('./db3'), { valueEncoding: 'hex' }))
 
 db.put('example', Buffer.from([0, 255]), function (err) {
   db.get('example', function (err, value) {
-    console.log(typeof value, value) // string 00ff
+    console.log(typeof value, value) // 'string 00ff'
   })
 })
 ```
@@ -72,16 +73,16 @@ db.put('example', Buffer.from([0, 255]), function (err) {
 What if we previously stored binary data?
 
 ```js
-const db = levelup(encode(leveldown('./db'), { valueEncoding: 'binary' }))
+const db = levelup(encode(leveldown('./db4'), { valueEncoding: 'binary' }))
 
 db.put('example', Buffer.from([0, 255]), function (err) {
   db.get('example', function (err, value) {
-    console.log(typeof value, value) // object <Buffer 00 ff>
+    console.log(typeof value, value) // 'object <Buffer 00 ff>'
   })
 
   // Override the encoding for this operation
   db.get('example', { valueEncoding: 'base64' }, function (err, value) {
-    console.log(typeof value, value) // string AP8=
+    console.log(typeof value, value) // 'string AP8='
   })
 })
 ```
@@ -89,19 +90,21 @@ db.put('example', Buffer.from([0, 255]), function (err) {
 And what about keys?
 
 ```js
-const db1 = levelup(encode(leveldown('./db1'), { keyEncoding: 'json' }))
+const db = levelup(encode(leveldown('./db5'), { keyEncoding: 'json' }))
 
-db1.put({ awesome: true }, 'example', function (err) {
-  db1.get({ awesome: true }, function (err, value) {
-    console.log(value) // example
+db.put({ awesome: true }, 'example', function (err) {
+  db.get({ awesome: true }, function (err, value) {
+    console.log(value) // 'example'
   })
 })
+```
 
-const db2 = levelup(encode(leveldown('./db2'), { keyEncoding: 'binary' }))
+```js
+const db = levelup(encode(leveldown('./db6'), { keyEncoding: 'binary' }))
 
-db2.put(Buffer.from([0, 255]), 'example', function (err) {
-  db2.get('00ff', { keyEncoding: 'hex' }, function (err, value) {
-    console.log(value) // example
+db.put(Buffer.from([0, 255]), 'example', function (err) {
+  db.get('00ff', { keyEncoding: 'hex' }, function (err, value) {
+    console.log(value) // 'example'
   })
 })
 ```
@@ -112,11 +115,12 @@ The [`level`] module conveniently bundles `encoding-down` and passes its `option
 
 ```js
 const level = require('level')
-const db = level('./db', { valueEncoding: 'json' })
+const db = level('./db7', { valueEncoding: 'json' })
 
-db.put('example', { awesome: true }, function (err) {
+db.put('example', 42, function (err) {
   db.get('example', function (err, value) {
-    console.log(typeof value, value) // object { awesome: true }
+    console.log(value) // 42
+    console.log(typeof value) // 'number'
   })
 })
 ```
