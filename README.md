@@ -28,7 +28,7 @@ db.put('name', 'encoding-down', function (err) {
 
 ### `const db = require('encoding-down')(db[, options])`
 
-* `db` `abstract-leveldown` compatible db such as `leveldown`, `memdown`, `level-js` etc
+* `db` must be an [`abstract-leveldown`] compliant store
 * `options.keyEncoding` (string) defaults to `'utf8'`
 * `options.valueEncoding` (string) defaults to `'utf8'`
 
@@ -39,3 +39,4 @@ db.put('name', 'encoding-down', function (err) {
 MIT
 
 [level-badge]: http://leveldb.org/img/badge.svg
+[`abstract-leveldown`]: https://github.com/level/abstract-leveldown
