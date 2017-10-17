@@ -76,7 +76,7 @@ const db = levelup(encode(leveldown('./db'), { valueEncoding: 'binary' }))
 
 db.put('example', Buffer.from([0, 255]), function (err) {
   db.get('example', function (err, value) {
-    console.log(typeof value, value) // object <Buffer 2e 20>
+    console.log(typeof value, value) // object <Buffer 00 ff>
   })
 
   // Override the encoding for this operation
