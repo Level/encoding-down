@@ -45,6 +45,7 @@ DB.prototype._put = function (key, value, opts, cb) {
 DB.prototype._get = function (key, opts, cb) {
   var self = this
   key = this.codec.encodeKey(key, opts)
+  opts.asBuffer = this.codec.valueAsBuffer(opts)
   this.db.get(key, opts, function (err, value) {
     if (err) return cb(err)
     try {
