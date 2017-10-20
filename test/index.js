@@ -159,3 +159,29 @@ test('custom value encoding that retrieves a buffer from underlying store', func
 
   db.get('key', noop)
 })
+
+test('iterator options .keyAsBuffer and .valueAsBuffer defaults', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.keyAsBuffer, true, '.keyAsBuffer defaults to true')
+      t.is(options.valueAsBuffer, true, '.valueAsBuffer defaults to true')
+    }
+  }
+
+  encdown(down).iterator()
+})
+
+test('iterator options .keyAsBuffer and .valueAsBuffer as strings', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.keyAsBuffer, false, '.keyAsBuffer should be false')
+      t.is(options.valueAsBuffer, false, '.valueAsBuffer should be false')
+    }
+  }
+
+  encdown(down).iterator({ keyAsBuffer: false, valueAsBuffer: false })
+})
