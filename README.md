@@ -123,9 +123,34 @@ db.put('example', 42, function (err) {
 
 `options` are passed to [`level-codec`].
 
-## Custom encoding
+## Custom encodings
 
-*todo*.
+Please refer to [`level-codec` documentation][encoding-format] for a precise description of the format. Here's a quick example with `level` and `async/await` just for fun:
+
+```js
+const level = require('level')
+const lexint = require('lexicographic-integer')
+
+async function main () {
+  const db = level('./db8', {
+    keyEncoding: {
+      // Hey, someone should publish this!
+      type: 'lexicographic-integer',
+      encode: (n) => lexint.pack(n, 'hex'),
+      decode: lexint.unpack,
+      buffer: false
+    }
+  })
+
+  await db.put(2, 'example')
+  await db.put(10, 'example')
+
+  // Without our encoding, the keys would sort as 10, 2.
+  db.createKeyStream().on('data', console.log) // 2, 10
+}
+
+main()
+```
 
 ## License
 
@@ -137,3 +162,4 @@ MIT
 [`level`]: https://github.com/level/level
 [`level-codec`]: https://github.com/level/level-codec
 [builtin-encodings]: https://github.com/level/level-codec#builtin-encodings
+[encoding-format]: https://github.com/level/level-codec#encoding-format
