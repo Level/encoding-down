@@ -121,7 +121,7 @@ db.put('example', 42, function (err) {
 * `options.keyEncoding` (string or object) defaults to `'utf8'`
 * `options.valueEncoding` (string or object) defaults to `'utf8'`
 
-`options` are passed to [`level-codec`](https://github.com/level/codec).
+`options` are passed to [`level-codec`].
 
 ## Custom encoding
 
