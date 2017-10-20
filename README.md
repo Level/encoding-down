@@ -118,10 +118,11 @@ db.put('example', 42, function (err) {
 ### `const db = require('encoding-down')(db[, options])`
 
 * `db` must be an [`abstract-leveldown`] compliant store
-* `options.keyEncoding` (string or object) defaults to `'utf8'`
-* `options.valueEncoding` (string or object) defaults to `'utf8'`
+* `options` are passed to [`level-codec`]:
+  - `keyEncoding`: encoding to use for keys
+  - `valueEncoding`: encoding to use for values
 
-`options` are passed to [`level-codec`].
+Both encodings default to `'utf8'`. They can be a string (builtin `level-codec` encoding) or an object (custom encoding).
 
 ## Custom encodings
 
