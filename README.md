@@ -13,19 +13,7 @@
 
 Stores like [`leveldown`] can only store strings and Buffers. For a richer set of data types you can wrap such a store with `encoding-down`. It allows you to specify an *encoding* to use for keys and values independently. This not only widens the range of input types, but also limits the range of output types. The encoding is applied to all read and write operations: it encodes writes and decodes reads.
 
-Many encodings are builtin courtesy of [`level-codec`]. The default encoding is `utf8` which ensures you'll always get back a string. You can also provide a custom encoding like `bytewise` - or your own!
-
-## Builtin encodings
-
-| Name     | Input                        | Stored as         | Output
-|:---------|:-----------------------------|:------------------|:------
-| `utf8`   | String or Buffer             | String or Buffer  | String
-| `json`   | Any JSON type                | JSON string       | Input
-| `binary` | Buffer, string or byte array | Buffer            | As stored
-| `hex`<br>`ascii`<br>`base64`<br>`ucs2`<br>`utf16le`<br>`utf-16le` | String or Buffer | Buffer | String
-| `none` a.k.a. `id`  | Any type (bypass encoding)   | Input\*            | As stored
-
-<sup>\*</sup> Stores may have their own type coercion. Whether type information is preserved depends on the [`abstract-leveldown`] implementation as well as the underlying storage (`LevelDB`, `IndexedDB`, etc).
+[Many encodings are builtin][builtin-encodings] courtesy of [`level-codec`]. The default encoding is `utf8` which ensures you'll always get back a string. You can also provide a custom encoding like `bytewise` - [or your own](#custom-encodings)!
 
 ## Usage
 
@@ -148,3 +136,4 @@ MIT
 [`leveldown`]: https://github.com/level/leveldown
 [`level`]: https://github.com/level/level
 [`level-codec`]: https://github.com/level/level-codec
+[builtin-encodings]: https://github.com/level/level-codec#builtin-encodings
