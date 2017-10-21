@@ -72,6 +72,8 @@ DB.prototype._batch = function (ops, opts, cb) {
 }
 
 DB.prototype._iterator = function (opts) {
+  opts.keyAsBuffer = this.codec.keyAsBuffer(opts)
+  opts.valueAsBuffer = this.codec.valueAsBuffer(opts)
   return new Iterator(this, opts)
 }
 
