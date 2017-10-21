@@ -2,6 +2,7 @@ var test = require('tape')
 var encdown = require('..')
 var memdown = require('memdown')
 var Buffer = require('safe-buffer').Buffer
+var noop = function () {}
 
 test('opens and closes the underlying db', function (t) {
   var _db = {
@@ -107,4 +108,111 @@ test('binary encoding, using batch', function (t) {
       })
     })
   })
+})
+
+test('default encoding retrieves a string from underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    get: function (key, options, cb) {
+      t.is(options.asBuffer, false, '.asBuffer is false')
+    }
+  }
+
+  var db = encdown(down)
+
+  db.get('key', noop)
+})
+
+test('custom value encoding that retrieves a string from underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    get: function (key, options, cb) {
+      t.is(options.asBuffer, false, '.asBuffer is false')
+    }
+  }
+
+  var db = encdown(down, {
+    valueEncoding: {
+      buffer: false
+    }
+  })
+
+  db.get('key', noop)
+})
+
+test('custom value encoding that retrieves a buffer from underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    get: function (key, options, cb) {
+      t.is(options.asBuffer, true, '.asBuffer is true')
+    }
+  }
+
+  var db = encdown(down, {
+    valueEncoding: {
+      buffer: true
+    }
+  })
+
+  db.get('key', noop)
+})
+
+test('.keyAsBuffer and .valueAsBuffer defaults to false', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.keyAsBuffer, false)
+      t.is(options.valueAsBuffer, false)
+    }
+  }
+
+  encdown(down).iterator()
+})
+
+test('.keyAsBuffer and .valueAsBuffer as buffers if encoding says so', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.keyAsBuffer, true)
+      t.is(options.valueAsBuffer, true)
+    }
+  }
+
+  var db = encdown(down, {
+    keyEncoding: {
+      buffer: true
+    },
+    valueEncoding: {
+      buffer: true
+    }
+  })
+
+  db.iterator()
+})
+
+test('.keyAsBuffer and .valueAsBuffer as strings if encoding says so', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.keyAsBuffer, false)
+      t.is(options.valueAsBuffer, false)
+    }
+  }
+
+  var db = encdown(down, {
+    keyEncoding: {
+      buffer: false
+    },
+    valueEncoding: {
+      buffer: false
+    }
+  })
+
+  db.iterator()
 })
