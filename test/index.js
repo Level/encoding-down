@@ -160,28 +160,59 @@ test('custom value encoding that retrieves a buffer from underlying store', func
   db.get('key', noop)
 })
 
-test('iterator options .keyAsBuffer and .valueAsBuffer defaults', function (t) {
+test('.keyAsBuffer and .valueAsBuffer defaults to false', function (t) {
   t.plan(2)
 
   var down = {
     iterator: function (options) {
-      t.is(options.keyAsBuffer, true, '.keyAsBuffer defaults to true')
-      t.is(options.valueAsBuffer, true, '.valueAsBuffer defaults to true')
+      t.is(options.keyAsBuffer, false)
+      t.is(options.valueAsBuffer, false)
     }
   }
 
   encdown(down).iterator()
 })
 
-test('iterator options .keyAsBuffer and .valueAsBuffer as strings', function (t) {
+test('.keyAsBuffer and .valueAsBuffer as buffers if encoding says so', function (t) {
   t.plan(2)
 
   var down = {
     iterator: function (options) {
-      t.is(options.keyAsBuffer, false, '.keyAsBuffer should be false')
-      t.is(options.valueAsBuffer, false, '.valueAsBuffer should be false')
+      t.is(options.keyAsBuffer, true)
+      t.is(options.valueAsBuffer, true)
     }
   }
 
-  encdown(down).iterator({ keyAsBuffer: false, valueAsBuffer: false })
+  var db = encdown(down, {
+    keyEncoding: {
+      buffer: true
+    },
+    valueEncoding: {
+      buffer: true
+    }
+  })
+
+  db.iterator()
+})
+
+test('.keyAsBuffer and .valueAsBuffer as strings if encoding says so', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.keyAsBuffer, false)
+      t.is(options.valueAsBuffer, false)
+    }
+  }
+
+  var db = encdown(down, {
+    keyEncoding: {
+      buffer: false
+    },
+    valueEncoding: {
+      buffer: false
+    }
+  })
+
+  db.iterator()
 })
