@@ -161,6 +161,6 @@ MIT
 [`abstract-leveldown`]: https://github.com/level/abstract-leveldown
 [`leveldown`]: https://github.com/level/leveldown
 [`level`]: https://github.com/level/level
-[`level-codec`]: https://github.com/level/level-codec
-[builtin-encodings]: https://github.com/level/level-codec#builtin-encodings
-[encoding-format]: https://github.com/level/level-codec#encoding-format
+[`level-codec`]: https://github.com/level/codec
+[builtin-encodings]: https://github.com/level/codec#builtin-encodings
+[encoding-format]: https://github.com/level/codec#encoding-format
