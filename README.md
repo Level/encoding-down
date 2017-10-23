@@ -135,7 +135,6 @@ const lexint = require('lexicographic-integer')
 async function main () {
   const db = level('./db8', {
     keyEncoding: {
-      // Hey, someone should publish this!
       type: 'lexicographic-integer',
       encode: (n) => lexint.pack(n, 'hex'),
       decode: lexint.unpack,
@@ -151,6 +150,17 @@ async function main () {
 }
 
 main()
+```
+
+With an npm-installed encoding (modularity ftw!) we can reduce the above to:
+
+```js
+const level = require('level')
+const lexint = require('lexicographic-integer-encoding')('hex')
+
+const db = level('./db8', {
+  keyEncoding: lexint
+})
 ```
 
 ## License
