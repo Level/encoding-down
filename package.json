@@ -1,6 +1,6 @@
 {
   "name": "encoding-down",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "license": "MIT",
   "repository": "level/encoding-down",
   "description": "LevelDOWN wrapper supporting levelup@1 encodings",
