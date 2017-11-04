@@ -4,6 +4,7 @@
 
 [![level badge][level-badge]](https://github.com/level/awesome)
 [![npm](https://img.shields.io/npm/v/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
+![Node version](https://img.shields.io/node/v/encoding-down.svg)
 [![Travis](https://travis-ci.org/Level/encoding-down.svg?branch=master)](https://travis-ci.org/Level/encoding-down)
 [![david](https://david-dm.org/Level/encoding-down.svg)](https://david-dm.org/level/encoding-down)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
