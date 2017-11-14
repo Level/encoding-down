@@ -25,7 +25,7 @@ test('opens and closes the underlying db', function (t) {
   })
 })
 
-test('encodings defaults to utf8', function (t) {
+test('encodings default to utf8', function (t) {
   var db = encdown(memdown())
   t.ok(db.db, '.db should be set')
   t.ok(db.codec, '.codec should be set')
@@ -34,6 +34,23 @@ test('encodings defaults to utf8', function (t) {
     valueEncoding: 'utf8'
   }, 'correct defaults')
   t.end()
+})
+
+test('default utf8 encoding stringifies numbers', function (t) {
+  t.plan(3)
+
+  var db = encdown({
+    put: function (key, value, callback) {
+      t.is(key, '1')
+      t.is(value, '2')
+    },
+    batch: function (ops, options, callback) {
+      t.same(ops, [ { type: 'put', key: '3', value: '4' } ])
+    }
+  })
+
+  db.put(1, 2, noop)
+  db.batch([{ type: 'put', key: 3, value: 4 }], noop)
 })
 
 test('test safe decode in get', function (t) {
