@@ -233,3 +233,78 @@ test('.keyAsBuffer and .valueAsBuffer as strings if encoding says so', function 
 
   db.iterator()
 })
+
+test('iterator options.keys and options.values default to true', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.keys, true)
+      t.is(options.values, true)
+    }
+  }
+
+  encdown(down).iterator()
+})
+
+test('iterator skips keys if options.keys is false', function (t) {
+  t.plan(4)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.keys, false)
+
+      return {
+        next: function (callback) {
+          callback(null, '', 'value')
+        }
+      }
+    }
+  }
+
+  var keyEncoding = {
+    decode: function (key) {
+      t.fail('should not be called')
+    }
+  }
+
+  var db = encdown(down, { keyEncoding: keyEncoding })
+  var it = db.iterator({ keys: false })
+
+  it.next(function (err, key, value) {
+    t.ifError(err, 'no next error')
+    t.is(key, undefined, 'normalized key to undefined')
+    t.is(value, 'value', 'got value')
+  })
+})
+
+test('iterator skips values if options.values is false', function (t) {
+  t.plan(4)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.values, false)
+
+      return {
+        next: function (callback) {
+          callback(null, 'key', '')
+        }
+      }
+    }
+  }
+
+  var valueEncoding = {
+    decode: function (value) {
+      t.fail('should not be called')
+    }
+  }
+
+  var db = encdown(down, { valueEncoding: valueEncoding })
+  var it = db.iterator({ values: false })
+
+  it.next(function (err, key, value) {
+    t.ifError(err, 'no next error')
+    t.is(key, 'key', 'got key')
+    t.is(value, undefined, 'normalized value to undefined')
+  })
+})
