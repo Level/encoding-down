@@ -84,6 +84,8 @@ DB.prototype.approximateSize = function (start, end, opts, cb) {
 function Iterator (db, opts) {
   AbstractIterator.call(this, db)
   this.codec = db.codec
+  this.keys = opts.keys
+  this.values = opts.values
   this.opts = this.codec.encodeLtgt(opts)
   this.it = db.db.iterator(this.opts)
 }
@@ -95,11 +97,16 @@ Iterator.prototype._next = function (cb) {
   this.it.next(function (err, key, value) {
     if (err) return cb(err)
     try {
-      if (typeof key !== 'undefined') {
+      if (self.keys && typeof key !== 'undefined') {
         key = self.codec.decodeKey(key, self.opts)
+      } else {
+        key = undefined
       }
-      if (typeof value !== 'undefined') {
+
+      if (self.values && typeof value !== 'undefined') {
         value = self.codec.decodeValue(value, self.opts)
+      } else {
+        value = undefined
       }
     } catch (err) {
       return cb(new EncodingError(err))
