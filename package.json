@@ -10,7 +10,7 @@
     "test": "standard && node test"
   },
   "devDependencies": {
-    "memdown": "^1.2.4",
+    "memdown": "^2.0.0",
     "safe-buffer": "^5.1.1",
     "standard": "^10.0.3",
     "tape": "^4.8.0"
