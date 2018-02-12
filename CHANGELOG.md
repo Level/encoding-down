@@ -9,7 +9,7 @@
 ## [3.0.1] - 2017-12-18
 
 ### Added
-* Test that default utf8 encoding stringifying numbers (@vweevers)
+* Test that default utf8 encoding stringifies numbers (@vweevers)
 
 ### Fixed
 * Skip decoding if `options.keys` or `options.values` is false (@vweevers)
