@@ -3,13 +3,13 @@
 ## [Unreleased]
 
 ### Changed
-* Update to `abstract-leveldown@4.0.0` (@ralphtheninja)
-* Update to `memdown@2.0.0` (@ralphtheninja)
+* Update `abstract-leveldown` to `4.0.0` (@ralphtheninja)
+* Update `memdown` to `2.0.0` (@ralphtheninja)
 
 ## [3.0.1] - 2017-12-18
 
 ### Added
-* Add test for default utf8 encoding stringifying numbers (@vweevers)
+* Test that default utf8 encoding stringifying numbers (@vweevers)
 
 ### Fixed
 * Skip decoding if `options.keys` or `options.values` is false (@vweevers)
@@ -20,7 +20,7 @@
 * README: add node badge (>= 4) (@vweevers)
 
 ### Changed
-* Update to `abstract-leveldown@3.0.0` (@ralphtheninja)
+* Update `abstract-leveldown` to `3.0.0` (@ralphtheninja)
 
 ### Removed
 * Remove 0.12 from Travis (@vweevers)
@@ -40,7 +40,7 @@
 ### Changed
 * README: tweak badges (@ralphtheninja)
 * README: add more code examples (@vweevers)
-* Update `level-codec` (@ralphtheninja)
+* Update `level-codec` to `8.0.0` (@ralphtheninja)
 
 ### Fixed
 * Fix problems related to missing `asBuffer`, `keyAsBuffer` and `valueAsBuffer` (@ralphtheninja)
