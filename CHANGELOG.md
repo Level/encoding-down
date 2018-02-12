@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+### Added
+* Add 9 to Travis (@ralphtheninja)
+
 ### Changed
 * Update `abstract-leveldown` to `4.0.0` (@ralphtheninja)
 * Update `memdown` to `2.0.0` (@ralphtheninja)
+
+### Removed
+* Remove 7 from Travis (@ralphtheninja)
 
 ## [3.0.1] - 2017-12-18
 
