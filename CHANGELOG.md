@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [4.0.0] - 2018-02-12
+
 ### Added
 * Add 9 to Travis (@ralphtheninja)
 
@@ -163,7 +165,8 @@
 
 :seedling: Initial release.
 
-[Unreleased]: https://github.com/level/encoding-down/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/level/encoding-down/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/level/encoding-down/compare/v3.0.1...v4.0.0
 [3.0.1]: https://github.com/level/encoding-down/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/level/encoding-down/compare/v2.3.4...v3.0.0
 [2.3.4]: https://github.com/level/encoding-down/compare/v2.3.3...v2.3.4
