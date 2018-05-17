@@ -71,6 +71,18 @@ DB.prototype._batch = function (ops, opts, cb) {
   this.db.batch(ops, opts, cb)
 }
 
+// TODO refactor this with the code in abstract-leveldown
+DB.prototype._setupIteratorOptions = function (options) {
+  return {
+    reverse: !!options.reverse,
+    keys: options.keys !== false,
+    values: options.values !== false,
+    limit: 'limit' in options ? options.limit : -1,
+    keyAsBuffer: options.keyAsBuffer !== false,
+    valueAsBuffer: options.valueAsBuffer !== false
+  }
+}
+
 DB.prototype._iterator = function (opts) {
   opts.keyAsBuffer = this.codec.keyAsBuffer(opts)
   opts.valueAsBuffer = this.codec.valueAsBuffer(opts)
