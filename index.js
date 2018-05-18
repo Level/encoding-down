@@ -77,6 +77,17 @@ DB.prototype._iterator = function (opts) {
   return new Iterator(this, opts)
 }
 
+// TODO refactor this with the code in abstract-leveldown
+DB.prototype._setupIteratorOptions = function (options) {
+  options.reverse = !!options.reverse
+  options.keys = options.keys !== false
+  options.values = options.values !== false
+  options.limit = 'limit' in options ? options.limit : -1
+  options.keyAsBuffer = options.keyAsBuffer !== false
+  options.valueAsBuffer = options.valueAsBuffer !== false
+  return options
+}
+
 DB.prototype.approximateSize = function (start, end, opts, cb) {
   return this.db.approximateSize(start, end, opts, cb)
 }
