@@ -308,3 +308,23 @@ test('iterator skips values if options.values is false', function (t) {
     t.is(value, undefined, 'normalized value to undefined')
   })
 })
+
+test('iterator options does not clobber ranges', function (t) {
+  t.plan(4)
+
+  var down = {
+    iterator: function (options) {
+      t.is(options.gt, null)
+      t.is(options.gte, null)
+      t.is(options.lt, null)
+      t.is(options.lte, null)
+    }
+  }
+
+  encdown(down).iterator({
+    gt: null,
+    gte: null,
+    lt: null,
+    lte: null
+  })
+})
