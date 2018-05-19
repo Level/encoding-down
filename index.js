@@ -4,6 +4,7 @@ var AbstractLevelDOWN = require('abstract-leveldown').AbstractLevelDOWN
 var AbstractChainedBatch = require('abstract-leveldown').AbstractChainedBatch
 var AbstractIterator = require('abstract-leveldown').AbstractIterator
 var inherits = require('util').inherits
+var xtend = require('xtend')
 var Codec = require('level-codec')
 var EncodingError = require('level-errors').EncodingError
 
@@ -75,6 +76,17 @@ DB.prototype._iterator = function (opts) {
   opts.keyAsBuffer = this.codec.keyAsBuffer(opts)
   opts.valueAsBuffer = this.codec.valueAsBuffer(opts)
   return new Iterator(this, opts)
+}
+
+DB.prototype._setupIteratorOptions = function (options) {
+  options = xtend(options)
+  options.reverse = !!options.reverse
+  options.keys = options.keys !== false
+  options.values = options.values !== false
+  options.limit = 'limit' in options ? options.limit : -1
+  options.keyAsBuffer = options.keyAsBuffer !== false
+  options.valueAsBuffer = options.valueAsBuffer !== false
+  return options
 }
 
 DB.prototype.approximateSize = function (start, end, opts, cb) {
