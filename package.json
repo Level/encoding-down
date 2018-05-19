@@ -18,7 +18,8 @@
   "dependencies": {
     "abstract-leveldown": "^4.0.0",
     "level-codec": "^8.0.0",
-    "level-errors": "^1.0.4"
+    "level-errors": "^1.0.4",
+    "xtend": "^4.0.1"
   },
   "engines": {
     "node": ">=4"
