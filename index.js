@@ -72,10 +72,19 @@ DB.prototype._batch = function (ops, opts, cb) {
   this.db.batch(ops, opts, cb)
 }
 
-DB.prototype._iterator = function (opts) {
-  opts.keyAsBuffer = this.codec.keyAsBuffer(opts)
-  opts.valueAsBuffer = this.codec.valueAsBuffer(opts)
-  return new Iterator(this, opts)
+DB.prototype.iterator = function (options) {
+  options = options || {}
+  options.reverse = !!options.reverse
+  options.keys = options.keys !== false
+  options.values = options.values !== false
+  options.limit = 'limit' in options ? options.limit : -1
+  options.keyAsBuffer = options.keyAsBuffer !== false
+  options.valueAsBuffer = options.valueAsBuffer !== false
+
+  options.keyAsBuffer = this.codec.keyAsBuffer(options)
+  options.valueAsBuffer = this.codec.valueAsBuffer(options)
+
+  return new Iterator(this, options)
 }
 
 DB.prototype._setupIteratorOptions = function (options) {
