@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [5.0.1] - 2018-05-19
+
+### Changed
+* Override `_setupIteratorOptions` to not clobber ranges (@ralphtheninja, @dominictarr)
+
+## [4.0.1] - 2018-05-19
+
+### Changed
+* Override `_setupIteratorOptions` to not clobber ranges (@ralphtheninja, @dominictarr)
+
 ## [5.0.0] - 2018-05-13
 
 ### Added
@@ -177,8 +187,10 @@
 
 :seedling: Initial release.
 
-[Unreleased]: https://github.com/level/encoding-down/compare/v5.0.0...HEAD
+[Unreleased]: https://github.com/level/encoding-down/compare/v5.0.1...HEAD
+[5.0.1]: https://github.com/level/encoding-down/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/level/encoding-down/compare/v4.0.0...v5.0.0
+[4.0.1]: https://github.com/level/encoding-down/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/level/encoding-down/compare/v3.0.1...v4.0.0
 [3.0.1]: https://github.com/level/encoding-down/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/level/encoding-down/compare/v2.3.4...v3.0.0
