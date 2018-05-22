@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [5.0.2] - 2018-05-23
+
+### Added
+* Add `UPGRADING.md` (@vweevers)
+
+### Changed
+* Upgrade `abstract-leveldown` to `5.0.0` (@ralphtheninja)
+* Upgrade `memdown` to `3.0.0` (@vweevers)
+
 ## [5.0.1] - 2018-05-19
 
 ### Changed
@@ -187,7 +196,8 @@
 
 :seedling: Initial release.
 
-[Unreleased]: https://github.com/level/encoding-down/compare/v5.0.1...HEAD
+[Unreleased]: https://github.com/level/encoding-down/compare/v5.0.2...HEAD
+[5.0.2]: https://github.com/level/encoding-down/compare/v5.0.1...v5.0.2
 [5.0.1]: https://github.com/level/encoding-down/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/level/encoding-down/compare/v4.0.0...v5.0.0
 [4.0.1]: https://github.com/level/encoding-down/compare/v4.0.0...v4.0.1
