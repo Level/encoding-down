@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [5.0.3] - 2018-05-30
+
+### Changed
+* Replace `util.inherits` with `inherits` module (@ralphtheninja)
+
 ## [5.0.2] - 2018-05-23
 
 ### Added
@@ -196,7 +201,8 @@
 
 :seedling: Initial release.
 
-[Unreleased]: https://github.com/level/encoding-down/compare/v5.0.2...HEAD
+[Unreleased]: https://github.com/level/encoding-down/compare/v5.0.3...HEAD
+[5.0.3]: https://github.com/level/encoding-down/compare/v5.0.2...v5.0.3
 [5.0.2]: https://github.com/level/encoding-down/compare/v5.0.1...v5.0.2
 [5.0.1]: https://github.com/level/encoding-down/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/level/encoding-down/compare/v4.0.0...v5.0.0
