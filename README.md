@@ -12,7 +12,7 @@
 
 ## Introduction
 
-Stores like [`leveldown`] can only store strings and Buffers. For a richer set of data types you can wrap such a store with `encoding-down`. It allows you to specify an *encoding* to use for keys and values independently. This not only widens the range of input types, but also limits the range of output types. The encoding is applied to all read and write operations: it encodes writes and decodes reads.
+Stores like [`leveldown`] can only store strings and Buffers. For a richer set of data types you can wrap such a store with `encoding-down`. It allows you to specify an _encoding_ to use for keys and values independently. This not only widens the range of input types, but also limits the range of output types. The encoding is applied to all read and write operations: it encodes writes and decodes reads.
 
 [Many encodings are builtin][builtin-encodings] courtesy of [`level-codec`]. The default encoding is `utf8` which ensures you'll always get back a string. You can also provide a custom encoding like `bytewise` - [or your own](#custom-encodings)!
 
@@ -118,10 +118,10 @@ db.put('example', 42, function (err) {
 
 ### `const db = require('encoding-down')(db[, options])`
 
-* `db` must be an [`abstract-leveldown`] compliant store
-* `options` are passed to [`level-codec`]:
-  - `keyEncoding`: encoding to use for keys
-  - `valueEncoding`: encoding to use for values
+-   `db` must be an [`abstract-leveldown`] compliant store
+-   `options` are passed to [`level-codec`]&#x3A;
+    -   `keyEncoding`: encoding to use for keys
+    -   `valueEncoding`: encoding to use for values
 
 Both encodings default to `'utf8'`. They can be a string (builtin `level-codec` encoding) or an object (custom encoding).
 
@@ -169,9 +169,15 @@ const db = level('./db8', {
 [MIT](./LICENSE.md) © 2017-present `encoding-down` [Contributors](./CONTRIBUTORS.md).
 
 [level-badge]: http://leveldb.org/img/badge.svg
+
 [`abstract-leveldown`]: https://github.com/level/abstract-leveldown
+
 [`leveldown`]: https://github.com/level/leveldown
+
 [`level`]: https://github.com/level/level
+
 [`level-codec`]: https://github.com/level/codec
+
 [builtin-encodings]: https://github.com/level/codec#builtin-encodings
+
 [encoding-format]: https://github.com/level/codec#encoding-format
