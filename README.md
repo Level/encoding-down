@@ -1,6 +1,6 @@
 # encoding-down
 
-> An [`abstract-leveldown`] implementation that wraps another store to encode keys and values.
+> An [`abstract-leveldown`][abstract-leveldown] implementation that wraps another store to encode keys and values.
 
 [![level badge][level-badge]](https://github.com/level/awesome)
 [![npm](https://img.shields.io/npm/v/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
@@ -12,9 +12,9 @@
 
 ## Introduction
 
-Stores like [`leveldown`] can only store strings and Buffers. For a richer set of data types you can wrap such a store with `encoding-down`. It allows you to specify an _encoding_ to use for keys and values independently. This not only widens the range of input types, but also limits the range of output types. The encoding is applied to all read and write operations: it encodes writes and decodes reads.
+Stores like [`leveldown`][leveldown] can only store strings and Buffers. For a richer set of data types you can wrap such a store with `encoding-down`. It allows you to specify an _encoding_ to use for keys and values independently. This not only widens the range of input types, but also limits the range of output types. The encoding is applied to all read and write operations: it encodes writes and decodes reads.
 
-[Many encodings are builtin][builtin-encodings] courtesy of [`level-codec`]. The default encoding is `utf8` which ensures you'll always get back a string. You can also provide a custom encoding like `bytewise` - [or your own](#custom-encodings)!
+[Many encodings are builtin][builtin-encodings] courtesy of [`level-codec`][level-codec]. The default encoding is `utf8` which ensures you'll always get back a string. You can also provide a custom encoding like `bytewise` - [or your own](#custom-encodings)!
 
 ## Usage
 
@@ -98,9 +98,9 @@ db.put(Buffer.from([0, 255]), 'example', function (err) {
 })
 ```
 
-## Usage with [`level`]
+## Usage with [`level`][level]
 
-The [`level`] module conveniently bundles `encoding-down` and passes its `options` to `encoding-down`. This means you can simply do:
+The [`level`][level] module conveniently bundles `encoding-down` and passes its `options` to `encoding-down`. This means you can simply do:
 
 ```js
 const level = require('level')
@@ -118,8 +118,8 @@ db.put('example', 42, function (err) {
 
 ### `const db = require('encoding-down')(db[, options])`
 
--   `db` must be an [`abstract-leveldown`] compliant store
--   `options` are passed to [`level-codec`]&#x3A;
+-   `db` must be an [`abstract-leveldown`][abstract-leveldown] compliant store
+-   `options` are passed to [`level-codec`][level-codec]:
     -   `keyEncoding`: encoding to use for keys
     -   `valueEncoding`: encoding to use for values
 
@@ -170,13 +170,13 @@ const db = level('./db8', {
 
 [level-badge]: http://leveldb.org/img/badge.svg
 
-[`abstract-leveldown`]: https://github.com/level/abstract-leveldown
+[abstract-leveldown]: https://github.com/level/abstract-leveldown
 
-[`leveldown`]: https://github.com/level/leveldown
+[leveldown]: https://github.com/level/leveldown
 
-[`level`]: https://github.com/level/level
+[level]: https://github.com/level/level
 
-[`level-codec`]: https://github.com/level/codec
+[level-codec]: https://github.com/level/codec
 
 [builtin-encodings]: https://github.com/level/codec#builtin-encodings
 
