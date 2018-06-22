@@ -166,7 +166,7 @@ const db = level('./db8', {
 
 ## License
 
-MIT
+[MIT](./LICENSE.md) © 2017-present `encoding-down` [Contributors](./CONTRIBUTORS.md).
 
 [level-badge]: http://leveldb.org/img/badge.svg
 [`abstract-leveldown`]: https://github.com/level/abstract-leveldown
