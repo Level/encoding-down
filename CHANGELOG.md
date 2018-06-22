@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [5.0.4] - 2018-06-22
+
+### Added
+
+-   Add `LICENSE.md` ([**@ralphtheninja**](https://github.com/ralphtheninja))
+-   Add `CONTRIBUTORS.md` ([**@ralphtheninja**](https://github.com/ralphtheninja))
+-   Add `remark` tooling ([**@ralphtheninja**](https://github.com/ralphtheninja))
+
 ## [5.0.3] - 2018-05-30
 
 ### Changed
@@ -243,7 +251,9 @@
 
 :seedling: Initial release.
 
-[unreleased]: https://github.com/level/encoding-down/compare/v5.0.3...HEAD
+[unreleased]: https://github.com/level/encoding-down/compare/v5.0.4...HEAD
+
+[5.0.4]: https://github.com/level/encoding-down/compare/v5.0.3...v5.0.4
 
 [5.0.3]: https://github.com/level/encoding-down/compare/v5.0.2...v5.0.3
 
