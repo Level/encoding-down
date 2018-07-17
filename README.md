@@ -7,6 +7,7 @@
 ![Node version](https://img.shields.io/node/v/encoding-down.svg)
 [![Travis](https://travis-ci.org/Level/encoding-down.svg?branch=master)](https://travis-ci.org/Level/encoding-down)
 [![david](https://david-dm.org/Level/encoding-down.svg)](https://david-dm.org/level/encoding-down)
+[![Coverage Status](https://coveralls.io/repos/github/Level/encoding-down/badge.svg)](https://coveralls.io/github/Level/encoding-down)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![npm](https://img.shields.io/npm/dm/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
 

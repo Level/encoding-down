@@ -6,12 +6,15 @@
   "description": "LevelDOWN wrapper supporting levelup@1 encodings",
   "main": "index.js",
   "scripts": {
-    "test": "standard && node test",
+    "test": "standard && nyc node test",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "remark": "remark README.md CONTRIBUTORS.md CHANGELOG.md UPGRADING.md -o"
   },
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "level-community": "^3.0.0",
     "memdown": "^3.0.0",
+    "nyc": "^12.0.2",
     "remark-cli": "^5.0.0",
     "remark-git-contributors": "^0.2.1",
     "remark-github": "^7.0.3",
