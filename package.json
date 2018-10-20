@@ -23,7 +23,7 @@
     "tape": "^4.8.0"
   },
   "dependencies": {
-    "abstract-leveldown": "^5.0.0",
+    "abstract-leveldown": "^6.0.0",
     "inherits": "^2.0.3",
     "level-codec": "^9.0.0",
     "level-errors": "^2.0.0",
