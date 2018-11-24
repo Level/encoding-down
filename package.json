@@ -16,7 +16,7 @@
     "memdown": "^3.0.0",
     "nyc": "^12.0.2",
     "remark-cli": "^5.0.0",
-    "remark-git-contributors": "^0.2.1",
+    "remark-git-contributors": "^0.3.0",
     "remark-github": "^7.0.3",
     "safe-buffer": "^5.1.1",
     "standard": "^12.0.0",
