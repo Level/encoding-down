@@ -22,11 +22,11 @@ Stores like [`leveldown`][leveldown] can only store strings and Buffers. For a r
 Without any options, `encoding-down` defaults to the `utf8` encoding.
 
 ```js
-const levelup = require('levelup')
-const leveldown = require('leveldown')
-const encode = require('encoding-down')
+var levelup = require('levelup')
+var leveldown = require('leveldown')
+var encode = require('encoding-down')
 
-const db = levelup(encode(leveldown('./db1')))
+var db = levelup(encode(leveldown('./db1')))
 
 db.put('example', Buffer.from('encoding-down'), function (err) {
   db.get('example', function (err, value) {
@@ -38,7 +38,7 @@ db.put('example', Buffer.from('encoding-down'), function (err) {
 Can we store objects? Yes!
 
 ```js
-const db = levelup(encode(leveldown('./db2'), { valueEncoding: 'json' }))
+var db = levelup(encode(leveldown('./db2'), { valueEncoding: 'json' }))
 
 db.put('example', { awesome: true }, function (err) {
   db.get('example', function (err, value) {
@@ -51,7 +51,7 @@ db.put('example', { awesome: true }, function (err) {
 How about storing Buffers, but getting back a hex-encoded string?
 
 ```js
-const db = levelup(encode(leveldown('./db3'), { valueEncoding: 'hex' }))
+var db = levelup(encode(leveldown('./db3'), { valueEncoding: 'hex' }))
 
 db.put('example', Buffer.from([0, 255]), function (err) {
   db.get('example', function (err, value) {
@@ -63,7 +63,7 @@ db.put('example', Buffer.from([0, 255]), function (err) {
 What if we previously stored binary data?
 
 ```js
-const db = levelup(encode(leveldown('./db4'), { valueEncoding: 'binary' }))
+var db = levelup(encode(leveldown('./db4'), { valueEncoding: 'binary' }))
 
 db.put('example', Buffer.from([0, 255]), function (err) {
   db.get('example', function (err, value) {
@@ -80,7 +80,7 @@ db.put('example', Buffer.from([0, 255]), function (err) {
 And what about keys?
 
 ```js
-const db = levelup(encode(leveldown('./db5'), { keyEncoding: 'json' }))
+var db = levelup(encode(leveldown('./db5'), { keyEncoding: 'json' }))
 
 db.put({ awesome: true }, 'example', function (err) {
   db.get({ awesome: true }, function (err, value) {
@@ -90,7 +90,7 @@ db.put({ awesome: true }, 'example', function (err) {
 ```
 
 ```js
-const db = levelup(encode(leveldown('./db6'), { keyEncoding: 'binary' }))
+var db = levelup(encode(leveldown('./db6'), { keyEncoding: 'binary' }))
 
 db.put(Buffer.from([0, 255]), 'example', function (err) {
   db.get('00ff', { keyEncoding: 'hex' }, function (err, value) {
@@ -104,8 +104,8 @@ db.put(Buffer.from([0, 255]), 'example', function (err) {
 The [`level`][level] module conveniently bundles `encoding-down` and passes its `options` to `encoding-down`. This means you can simply do:
 
 ```js
-const level = require('level')
-const db = level('./db7', { valueEncoding: 'json' })
+var level = require('level')
+var db = level('./db7', { valueEncoding: 'json' })
 
 db.put('example', 42, function (err) {
   db.get('example', function (err, value) {
@@ -117,7 +117,7 @@ db.put('example', 42, function (err) {
 
 ## API
 
-### `const db = require('encoding-down')(db[, options])`
+### `db = require('encoding-down')(db[, options])`
 
 -   `db` must be an [`abstract-leveldown`][abstract-leveldown] compliant store
 -   `options` are passed to [`level-codec`][level-codec]:
@@ -131,11 +131,11 @@ Both encodings default to `'utf8'`. They can be a string (builtin `level-codec` 
 Please refer to [`level-codec` documentation][encoding-format] for a precise description of the format. Here's a quick example with `level` and `async/await` just for fun:
 
 ```js
-const level = require('level')
-const lexint = require('lexicographic-integer')
+var level = require('level')
+var lexint = require('lexicographic-integer')
 
 async function main () {
-  const db = level('./db8', {
+  var db = level('./db8', {
     keyEncoding: {
       type: 'lexicographic-integer',
       encode: (n) => lexint.pack(n, 'hex'),
@@ -157,10 +157,10 @@ main()
 With an npm-installed encoding (modularity ftw!) we can reduce the above to:
 
 ```js
-const level = require('level')
-const lexint = require('lexicographic-integer-encoding')('hex')
+var level = require('level')
+var lexint = require('lexicographic-integer-encoding')('hex')
 
-const db = level('./db8', {
+var db = level('./db8', {
   keyEncoding: lexint
 })
 ```
