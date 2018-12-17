@@ -13,7 +13,7 @@
 
 ## Introduction
 
-Stores like [`leveldown`][leveldown] can only store strings and Buffers. For a richer set of data types you can wrap such a store with `encoding-down`. It allows you to specify an _encoding_ to use for keys and values independently. This not only widens the range of input types, but also limits the range of output types. The encoding is applied to all read and write operations: it encodes writes and decodes reads.
+Stores like [`leveldown`][leveldown] can only store strings and Buffers. Other types, though accepted, are [_serialized_](https://github.com/Level/abstract-leveldown#db_serializekeykey) before storage, which is an irreversible type conversion. For a richer set of data types you can wrap such a store with `encoding-down`. It allows you to specify an _encoding_ to use for keys and values independently. This not only widens the range of input types, but also limits the range of output types. The encoding is applied to all read and write operations: it encodes writes and decodes reads.
 
 [Many encodings are builtin][builtin-encodings] courtesy of [`level-codec`][level-codec]. The default encoding is `utf8` which ensures you'll always get back a string. You can also provide a custom encoding like `bytewise` - [or your own](#custom-encodings)!
 
