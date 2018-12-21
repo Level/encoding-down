@@ -19,6 +19,7 @@
 ### Removed
 
 -   Remove node 9 ([**@ralphtheninja**](https://github.com/ralphtheninja))
+-   Remove `_setupIteratorOptions()` ([**@ralphtheninja**](https://github.com/ralphtheninja))
 
 ## [5.0.4] - 2018-06-22
 
