@@ -6,20 +6,20 @@
 
 ### Changed
 
--   Explain serialization ([#72](https://github.com/level/encoding-down/issues/72)) ([**@vweevers**](https://github.com/vweevers))
- -   Prefer `const` over `var` in README ([**@ralphtheninja**](https://github.com/ralphtheninja))
- -   Upgrade `abstract-leveldown` dependency from `^5.0.0` to `^v6.0.0` ([#68](https://github.com/level/encoding-down/issues/68)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
+-   Prefer `const` over `var` in README ([**@ralphtheninja**](https://github.com/ralphtheninja))
+-   Upgrade `abstract-leveldown` dependency from `^5.0.0` to `^v6.0.0` ([#68](https://github.com/level/encoding-down/issues/68)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
 -   Upgrade `standard` devDependency from `^11.0.0` to `^v12.0.0` ([**@ralphtheninja**](https://github.com/ralphtheninja))
 -   Use full link references in README ([#60](https://github.com/level/encoding-down/issues/60)) ([**@vweevers**](https://github.com/vweevers))
 
 ### Added
 
+-   Explain serialization ([#72](https://github.com/level/encoding-down/issues/72)) ([**@vweevers**](https://github.com/vweevers))
 -   Add `nyc` and `coveralls` ([#64](https://github.com/level/encoding-down/issues/64)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
 
 ### Removed
 
 -   Remove node 9 ([**@ralphtheninja**](https://github.com/ralphtheninja))
- -   Remove now superfluous `_setupIteratorOptions()` ([**@ralphtheninja**](https://github.com/ralphtheninja))
+-   Remove now superfluous `_setupIteratorOptions()` ([**@ralphtheninja**](https://github.com/ralphtheninja))
 
 ## [5.0.4] - 2018-06-22
 
