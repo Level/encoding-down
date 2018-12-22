@@ -4,7 +4,7 @@ This document describes breaking changes and how to upgrade. For a complete list
 
 ## v6
 
-Upgraded `abstract-leveldown` to `v6.0.0`. Please see corresponding [changelog entry](https://github.com/Level/abstract-leveldown/blob/master/CHANGELOG.md#600---2018-10-20) for more information.
+ Upgraded `abstract-leveldown` to `v6.0.0`. Please see the corresponding [changelog entry](https://github.com/Level/abstract-leveldown/blob/master/CHANGELOG.md#600---2018-10-20) for more information.
 
 ## v5
 
