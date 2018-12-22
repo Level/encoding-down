@@ -7,7 +7,7 @@
 ### Changed
 
 -   Explain serialization ([#72](https://github.com/level/encoding-down/issues/72)) ([**@vweevers**](https://github.com/vweevers))
--   `const` -> `var` in README ([**@ralphtheninja**](https://github.com/ralphtheninja))
+ -   Prefer `const` over `var` in README ([**@ralphtheninja**](https://github.com/ralphtheninja))
 -   Upgrade `abstract-leveldown` dependency from `^6.0.0` to `^v6.0.0` ([#68](https://github.com/level/encoding-down/issues/68)) ([**@vweevers**](https://github.com/vweevers))
 -   Upgrade `standard` devDependency from `^11.0.0` to `^v12.0.0` ([**@ralphtheninja**](https://github.com/ralphtheninja))
 -   Use full link references in README ([#60](https://github.com/level/encoding-down/issues/60)) ([**@vweevers**](https://github.com/vweevers))
