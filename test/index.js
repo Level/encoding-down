@@ -159,6 +159,20 @@ test('custom value encoding that retrieves a string from underlying store', func
   db.get('key', noop)
 })
 
+test('get() forwards error from underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    get: function (key, options, cb) {
+      process.nextTick(cb, new Error('error from store'))
+    }
+  }
+
+  encdown(down).get('key', function (err) {
+    t.is(err.message, 'error from store')
+  })
+})
+
 test('custom value encoding that retrieves a buffer from underlying store', function (t) {
   t.plan(1)
 
