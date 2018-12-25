@@ -173,6 +173,18 @@ test('get() forwards error from underlying store', function (t) {
   })
 })
 
+test('_del() encodes key', function (t) {
+  t.plan(1)
+
+  var down = {
+    del: function (key, options, cb) {
+      t.is(key, '2')
+    }
+  }
+
+  encdown(down).del(2, noop)
+})
+
 test('custom value encoding that retrieves a buffer from underlying store', function (t) {
   t.plan(1)
 
