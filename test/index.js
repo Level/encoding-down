@@ -185,6 +185,71 @@ test('_del() encodes key', function (t) {
   encdown(down).del(2, noop)
 })
 
+test('chainedBatch.put() encodes key and value', function (t) {
+  t.plan(2)
+
+  var down = {
+    batch: function () {
+      return {
+        put: function (key, value) {
+          t.is(key, '1')
+          t.is(value, '2')
+        }
+      }
+    }
+  }
+
+  encdown(down).batch().put(1, 2)
+})
+
+test('chainedBatch.del() encodes key', function (t) {
+  t.plan(1)
+
+  var down = {
+    batch: function () {
+      return {
+        del: function (key) {
+          t.is(key, '1')
+        }
+      }
+    }
+  }
+
+  encdown(down).batch().del(1)
+})
+
+test('chainedBatch.clear() is forwarded to underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    batch: function () {
+      return {
+        clear: function () {
+          t.pass('called')
+        }
+      }
+    }
+  }
+
+  encdown(down).batch().clear()
+})
+
+test('chainedBatch.write() is forwarded to underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    batch: function () {
+      return {
+        write: function () {
+          t.pass('called')
+        }
+      }
+    }
+  }
+
+  encdown(down).batch().write(noop)
+})
+
 test('custom value encoding that retrieves a buffer from underlying store', function (t) {
   t.plan(1)
 
