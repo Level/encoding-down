@@ -462,3 +462,63 @@ test('iterator forwards end() to underlying iterator', function (t) {
     t.pass('called')
   })
 })
+
+test('iterator catches decoding error from keyEncoding', function (t) {
+  t.plan(5)
+
+  var down = {
+    iterator: function () {
+      return {
+        next: function (callback) {
+          process.nextTick(callback, null, 'key', 'value')
+        }
+      }
+    }
+  }
+
+  var db = encdown(down, {
+    keyEncoding: {
+      decode: function (key) {
+        t.is(key, 'key')
+        throw new Error('from codec')
+      }
+    }
+  })
+
+  db.iterator().next(function (err, key, value) {
+    t.is(err.message, 'from codec')
+    t.is(err.name, 'EncodingError')
+    t.is(key, undefined)
+    t.is(value, undefined)
+  })
+})
+
+test('iterator catches decoding error from valueEncoding', function (t) {
+  t.plan(5)
+
+  var down = {
+    iterator: function () {
+      return {
+        next: function (callback) {
+          process.nextTick(callback, null, 'key', 'value')
+        }
+      }
+    }
+  }
+
+  var db = encdown(down, {
+    valueEncoding: {
+      decode: function (value) {
+        t.is(value, 'value')
+        throw new Error('from codec')
+      }
+    }
+  })
+
+  db.iterator().next(function (err, key, value) {
+    t.is(err.message, 'from codec')
+    t.is(err.name, 'EncodingError')
+    t.is(key, undefined)
+    t.is(value, undefined)
+  })
+})
