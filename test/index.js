@@ -440,3 +440,25 @@ test('iterator forwards next() error from underlying iterator', function (t) {
     t.is(err.message, 'from underlying iterator')
   })
 })
+
+test('iterator forwards end() to underlying iterator', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function () {
+      return {
+        end: function (callback) {
+          t.pass('called')
+          process.nextTick(callback)
+        }
+      }
+    }
+  }
+
+  var db = encdown(down)
+  var it = db.iterator()
+
+  it.end(function () {
+    t.pass('called')
+  })
+})
