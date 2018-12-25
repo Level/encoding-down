@@ -159,6 +159,97 @@ test('custom value encoding that retrieves a string from underlying store', func
   db.get('key', noop)
 })
 
+test('get() forwards error from underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    get: function (key, options, cb) {
+      process.nextTick(cb, new Error('error from store'))
+    }
+  }
+
+  encdown(down).get('key', function (err) {
+    t.is(err.message, 'error from store')
+  })
+})
+
+test('_del() encodes key', function (t) {
+  t.plan(1)
+
+  var down = {
+    del: function (key, options, cb) {
+      t.is(key, '2')
+    }
+  }
+
+  encdown(down).del(2, noop)
+})
+
+test('chainedBatch.put() encodes key and value', function (t) {
+  t.plan(2)
+
+  var down = {
+    batch: function () {
+      return {
+        put: function (key, value) {
+          t.is(key, '1')
+          t.is(value, '2')
+        }
+      }
+    }
+  }
+
+  encdown(down).batch().put(1, 2)
+})
+
+test('chainedBatch.del() encodes key', function (t) {
+  t.plan(1)
+
+  var down = {
+    batch: function () {
+      return {
+        del: function (key) {
+          t.is(key, '1')
+        }
+      }
+    }
+  }
+
+  encdown(down).batch().del(1)
+})
+
+test('chainedBatch.clear() is forwarded to underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    batch: function () {
+      return {
+        clear: function () {
+          t.pass('called')
+        }
+      }
+    }
+  }
+
+  encdown(down).batch().clear()
+})
+
+test('chainedBatch.write() is forwarded to underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    batch: function () {
+      return {
+        write: function () {
+          t.pass('called')
+        }
+      }
+    }
+  }
+
+  encdown(down).batch().write(noop)
+})
+
 test('custom value encoding that retrieves a buffer from underlying store', function (t) {
   t.plan(1)
 
@@ -309,22 +400,168 @@ test('iterator skips values if options.values is false', function (t) {
   })
 })
 
-test('iterator options does not clobber ranges', function (t) {
-  t.plan(4)
+test('iterator does not strip nullish range options', function (t) {
+  t.plan(12)
 
-  var down = {
+  encdown({
     iterator: function (options) {
       t.is(options.gt, null)
       t.is(options.gte, null)
       t.is(options.lt, null)
       t.is(options.lte, null)
     }
-  }
-
-  encdown(down).iterator({
+  }).iterator({
     gt: null,
     gte: null,
     lt: null,
     lte: null
   })
+
+  encdown({
+    iterator: function (options) {
+      t.ok(options.hasOwnProperty('gt'))
+      t.ok(options.hasOwnProperty('gte'))
+      t.ok(options.hasOwnProperty('lt'))
+      t.ok(options.hasOwnProperty('lte'))
+
+      t.is(options.gt, undefined)
+      t.is(options.gte, undefined)
+      t.is(options.lt, undefined)
+      t.is(options.lte, undefined)
+    }
+  }).iterator({
+    gt: undefined,
+    gte: undefined,
+    lt: undefined,
+    lte: undefined
+  })
+})
+
+test('iterator does not add nullish range options', function (t) {
+  t.plan(4)
+
+  encdown({
+    iterator: function (options) {
+      t.notOk(options.hasOwnProperty('gt'))
+      t.notOk(options.hasOwnProperty('gte'))
+      t.notOk(options.hasOwnProperty('lt'))
+      t.notOk(options.hasOwnProperty('lte'))
+    }
+  }).iterator({})
+})
+
+test('iterator forwards next() error from underlying iterator', function (t) {
+  t.plan(1)
+
+  var down = {
+    iterator: function () {
+      return {
+        next: function (callback) {
+          process.nextTick(callback, new Error('from underlying iterator'))
+        }
+      }
+    }
+  }
+
+  var db = encdown(down)
+  var it = db.iterator()
+
+  it.next(function (err, key, value) {
+    t.is(err.message, 'from underlying iterator')
+  })
+})
+
+test('iterator forwards end() to underlying iterator', function (t) {
+  t.plan(2)
+
+  var down = {
+    iterator: function () {
+      return {
+        end: function (callback) {
+          t.pass('called')
+          process.nextTick(callback)
+        }
+      }
+    }
+  }
+
+  var db = encdown(down)
+  var it = db.iterator()
+
+  it.end(function () {
+    t.pass('called')
+  })
+})
+
+test('iterator catches decoding error from keyEncoding', function (t) {
+  t.plan(5)
+
+  var down = {
+    iterator: function () {
+      return {
+        next: function (callback) {
+          process.nextTick(callback, null, 'key', 'value')
+        }
+      }
+    }
+  }
+
+  var db = encdown(down, {
+    keyEncoding: {
+      decode: function (key) {
+        t.is(key, 'key')
+        throw new Error('from codec')
+      }
+    }
+  })
+
+  db.iterator().next(function (err, key, value) {
+    t.is(err.message, 'from codec')
+    t.is(err.name, 'EncodingError')
+    t.is(key, undefined)
+    t.is(value, undefined)
+  })
+})
+
+test('iterator catches decoding error from valueEncoding', function (t) {
+  t.plan(5)
+
+  var down = {
+    iterator: function () {
+      return {
+        next: function (callback) {
+          process.nextTick(callback, null, 'key', 'value')
+        }
+      }
+    }
+  }
+
+  var db = encdown(down, {
+    valueEncoding: {
+      decode: function (value) {
+        t.is(value, 'value')
+        throw new Error('from codec')
+      }
+    }
+  })
+
+  db.iterator().next(function (err, key, value) {
+    t.is(err.message, 'from codec')
+    t.is(err.name, 'EncodingError')
+    t.is(key, undefined)
+    t.is(value, undefined)
+  })
+})
+
+test('approximateSize() encodes start and end', function (t) {
+  t.plan(2)
+
+  var down = {
+    approximateSize: function (start, end) {
+      t.is(start, '1')
+      t.is(end, '2')
+    }
+  }
+
+  encdown(down).approximateSize(1, 2, noop)
 })
