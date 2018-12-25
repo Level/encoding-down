@@ -522,3 +522,16 @@ test('iterator catches decoding error from valueEncoding', function (t) {
     t.is(value, undefined)
   })
 })
+
+test('approximateSize() encodes start and end', function (t) {
+  t.plan(2)
+
+  var down = {
+    approximateSize: function (start, end) {
+      t.is(start, '1')
+      t.is(end, '2')
+    }
+  }
+
+  encdown(down).approximateSize(1, 2, noop)
+})
