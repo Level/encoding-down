@@ -78,6 +78,8 @@ DB.prototype._iterator = function (opts) {
 }
 
 DB.prototype.approximateSize = function (start, end, opts, cb) {
+  start = this.codec.encodeKey(start, opts)
+  end = this.codec.encodeKey(end, opts)
   return this.db.approximateSize(start, end, opts, cb)
 }
 
