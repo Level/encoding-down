@@ -400,24 +400,54 @@ test('iterator skips values if options.values is false', function (t) {
   })
 })
 
-test('iterator options does not clobber ranges', function (t) {
-  t.plan(4)
+test('iterator does not strip nullish range options', function (t) {
+  t.plan(12)
 
-  var down = {
+  encdown({
     iterator: function (options) {
       t.is(options.gt, null)
       t.is(options.gte, null)
       t.is(options.lt, null)
       t.is(options.lte, null)
     }
-  }
-
-  encdown(down).iterator({
+  }).iterator({
     gt: null,
     gte: null,
     lt: null,
     lte: null
   })
+
+  encdown({
+    iterator: function (options) {
+      t.ok(options.hasOwnProperty('gt'))
+      t.ok(options.hasOwnProperty('gte'))
+      t.ok(options.hasOwnProperty('lt'))
+      t.ok(options.hasOwnProperty('lte'))
+
+      t.is(options.gt, undefined)
+      t.is(options.gte, undefined)
+      t.is(options.lt, undefined)
+      t.is(options.lte, undefined)
+    }
+  }).iterator({
+    gt: undefined,
+    gte: undefined,
+    lt: undefined,
+    lte: undefined
+  })
+})
+
+test('iterator does not add nullish range options', function (t) {
+  t.plan(4)
+
+  encdown({
+    iterator: function (options) {
+      t.notOk(options.hasOwnProperty('gt'))
+      t.notOk(options.hasOwnProperty('gte'))
+      t.notOk(options.hasOwnProperty('lt'))
+      t.notOk(options.hasOwnProperty('lte'))
+    }
+  }).iterator({})
 })
 
 test('iterator forwards next() error from underlying iterator', function (t) {
