@@ -419,3 +419,24 @@ test('iterator options does not clobber ranges', function (t) {
     lte: null
   })
 })
+
+test('iterator forwards next() error from underlying iterator', function (t) {
+  t.plan(1)
+
+  var down = {
+    iterator: function () {
+      return {
+        next: function (callback) {
+          process.nextTick(callback, new Error('from underlying iterator'))
+        }
+      }
+    }
+  }
+
+  var db = encdown(down)
+  var it = db.iterator()
+
+  it.next(function (err, key, value) {
+    t.is(err.message, 'from underlying iterator')
+  })
+})
