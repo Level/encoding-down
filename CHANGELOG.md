@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## [6.0.1] - 2018-12-27
+
+### Changed
+
+- Replace `remark-cli` devDependency with `hallmark` (#76) (@vweevers)
+
+### Added
+
+- Increase coverage to 100% (#75) (@vweevers)
+
+### Fixed
+
+- Fix `approximateSize()` to encode `start` and `end` arguments (#75) (@vweevers)
+
 ## [6.0.0] - 2018-12-25
 
 ### Changed
@@ -270,7 +284,9 @@
 
 :seedling: Initial release.
 
-[unreleased]: https://github.com/level/encoding-down/compare/v6.0.0...HEAD
+[unreleased]: https://github.com/level/encoding-down/compare/v6.0.1...HEAD
+
+[6.0.1]: https://github.com/level/encoding-down/compare/v6.0.0...v6.0.1
 
 [6.0.0]: https://github.com/level/encoding-down/compare/v5.0.4...v6.0.0
 
