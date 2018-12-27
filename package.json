@@ -6,18 +6,16 @@
   "description": "LevelDOWN wrapper supporting levelup@1 encodings",
   "main": "index.js",
   "scripts": {
-    "test": "standard && nyc node test",
+    "test": "standard && hallmark && nyc node test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "remark": "remark README.md CONTRIBUTORS.md CHANGELOG.md UPGRADING.md -o"
+    "hallmark": "hallmark --fix"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
+    "hallmark": "^0.1.0",
     "level-community": "^3.0.0",
     "memdown": "^3.0.0",
     "nyc": "^12.0.2",
-    "remark-cli": "^5.0.0",
-    "remark-git-contributors": "^0.2.1",
-    "remark-github": "^7.0.3",
     "safe-buffer": "^5.1.1",
     "standard": "^12.0.0",
     "tape": "^4.8.0"
@@ -28,16 +26,8 @@
     "level-codec": "^9.0.0",
     "level-errors": "^2.0.0"
   },
-  "remarkConfig": {
-    "plugins": [
-      [
-        "remark-git-contributors",
-        "level-community"
-      ],
-      [
-        "remark-github"
-      ]
-    ]
+  "hallmark": {
+    "community": "level-community"
   },
   "engines": {
     "node": ">=6"
