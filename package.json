@@ -29,6 +29,7 @@
     "community": "level-community"
   },
   "repository": "level/encoding-down",
+  "homepage": "https://github.com/Level/encoding-down",
   "engines": {
     "node": ">=6"
   }
