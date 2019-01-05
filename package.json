@@ -1,14 +1,19 @@
 {
   "name": "encoding-down",
   "version": "6.0.1",
-  "license": "MIT",
-  "repository": "level/encoding-down",
   "description": "LevelDOWN wrapper supporting levelup@1 encodings",
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
     "test": "standard && hallmark && nyc node test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "hallmark": "hallmark --fix"
+  },
+  "dependencies": {
+    "abstract-leveldown": "^6.0.0",
+    "inherits": "^2.0.3",
+    "level-codec": "^9.0.0",
+    "level-errors": "^2.0.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
@@ -20,15 +25,10 @@
     "standard": "^12.0.0",
     "tape": "^4.8.0"
   },
-  "dependencies": {
-    "abstract-leveldown": "^6.0.0",
-    "inherits": "^2.0.3",
-    "level-codec": "^9.0.0",
-    "level-errors": "^2.0.0"
-  },
   "hallmark": {
     "community": "level-community"
   },
+  "repository": "level/encoding-down",
   "engines": {
     "node": ">=6"
   }
