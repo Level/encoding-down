@@ -30,6 +30,9 @@
   },
   "repository": "level/encoding-down",
   "homepage": "https://github.com/Level/encoding-down",
+  "keywords": [
+    "level"
+  ],
   "engines": {
     "node": ">=6"
   }
