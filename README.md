@@ -2,11 +2,10 @@
 
 > An [`abstract-leveldown`][abstract-leveldown] implementation that wraps another store to encode keys and values.
 
-[![level badge][level-badge]](https://github.com/level/awesome)
+[![level badge][level-badge]](https://github.com/Level/awesome)
 [![npm](https://img.shields.io/npm/v/encoding-down.svg?label=&logo=npm)](https://www.npmjs.com/package/encoding-down)
 [![Node version](https://img.shields.io/node/v/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
-[![Travis](https://travis-ci.org/Level/encoding-down.svg?branch=master)](https://travis-ci.org/Level/encoding-down)
-[![david](https://david-dm.org/Level/encoding-down.svg)](https://david-dm.org/level/encoding-down)
+[![Travis](https://img.shields.io/travis/Level/encoding-down.svg?logo=travis&label=)](https://travis-ci.org/Level/encoding-down)
 [![Coverage Status](https://coveralls.io/repos/github/Level/encoding-down/badge.svg)](https://coveralls.io/github/Level/encoding-down)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![npm](https://img.shields.io/npm/dm/encoding-down.svg?label=dl)](https://www.npmjs.com/package/encoding-down)
@@ -193,14 +192,14 @@ To sustain [`Level`](https://github.com/Level) and its activities, become a back
 
 [level-badge]: http://leveldb.org/img/badge.svg
 
-[abstract-leveldown]: https://github.com/level/abstract-leveldown
+[abstract-leveldown]: https://github.com/Level/abstract-leveldown
 
-[leveldown]: https://github.com/level/leveldown
+[leveldown]: https://github.com/Level/leveldown
 
-[level]: https://github.com/level/level
+[level]: https://github.com/Level/level
 
-[level-codec]: https://github.com/level/codec
+[level-codec]: https://github.com/Level/codec
 
-[builtin-encodings]: https://github.com/level/codec#builtin-encodings
+[builtin-encodings]: https://github.com/Level/codec#builtin-encodings
 
-[encoding-format]: https://github.com/level/codec#encoding-format
+[encoding-format]: https://github.com/Level/codec#encoding-format
