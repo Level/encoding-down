@@ -2,14 +2,15 @@
 
 > An [`abstract-leveldown`][abstract-leveldown] implementation that wraps another store to encode keys and values.
 
-[![level badge][level-badge]](https://github.com/level/awesome)
-[![npm](https://img.shields.io/npm/v/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
-![Node version](https://img.shields.io/node/v/encoding-down.svg)
-[![Travis](https://travis-ci.org/Level/encoding-down.svg?branch=master)](https://travis-ci.org/Level/encoding-down)
-[![david](https://david-dm.org/Level/encoding-down.svg)](https://david-dm.org/level/encoding-down)
+[![level badge][level-badge]](https://github.com/Level/awesome)
+[![npm](https://img.shields.io/npm/v/encoding-down.svg?label=&logo=npm)](https://www.npmjs.com/package/encoding-down)
+[![Node version](https://img.shields.io/node/v/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
+[![Travis](https://img.shields.io/travis/Level/encoding-down.svg?logo=travis&label=)](https://travis-ci.org/Level/encoding-down)
 [![Coverage Status](https://coveralls.io/repos/github/Level/encoding-down/badge.svg)](https://coveralls.io/github/Level/encoding-down)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![npm](https://img.shields.io/npm/dm/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
+[![npm](https://img.shields.io/npm/dm/encoding-down.svg?label=dl)](https://www.npmjs.com/package/encoding-down)
+[![Backers on Open Collective](https://opencollective.com/level/backers/badge.svg?color=orange)](#backers)
+[![Sponsors on Open Collective](https://opencollective.com/level/sponsors/badge.svg?color=orange)](#sponsors)
 
 ## Introduction
 
@@ -173,20 +174,32 @@ var db = level('./db8', {
 
 See the [Contribution Guide](https://github.com/Level/community/blob/master/CONTRIBUTING.md) for more details.
 
+## Donate
+
+To sustain [`Level`](https://github.com/Level) and its activities, become a backer or sponsor on [Open Collective](https://opencollective.com/level). Your logo or avatar will be displayed on our 28+ [GitHub repositories](https://github.com/Level), [npm](https://www.npmjs.com/) packages and (soon) [our website](http://leveldb.org). 💖
+
+### Backers
+
+[![Open Collective backers](https://opencollective.com/level/backers.svg?width=890)](https://opencollective.com/level)
+
+### Sponsors
+
+[![Open Collective sponsors](https://opencollective.com/level/sponsors.svg?width=890)](https://opencollective.com/level)
+
 ## License
 
 [MIT](LICENSE.md) © 2012-present [Contributors](CONTRIBUTORS.md).
 
 [level-badge]: http://leveldb.org/img/badge.svg
 
-[abstract-leveldown]: https://github.com/level/abstract-leveldown
+[abstract-leveldown]: https://github.com/Level/abstract-leveldown
 
-[leveldown]: https://github.com/level/leveldown
+[leveldown]: https://github.com/Level/leveldown
 
-[level]: https://github.com/level/level
+[level]: https://github.com/Level/level
 
-[level-codec]: https://github.com/level/codec
+[level-codec]: https://github.com/Level/codec
 
-[builtin-encodings]: https://github.com/level/codec#builtin-encodings
+[builtin-encodings]: https://github.com/Level/codec#builtin-encodings
 
-[encoding-format]: https://github.com/level/codec#encoding-format
+[encoding-format]: https://github.com/Level/codec#encoding-format
