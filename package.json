@@ -23,7 +23,7 @@
     "hallmark": "^0.1.0",
     "level-community": "^3.0.0",
     "memdown": "^3.0.0",
-    "nyc": "^12.0.2",
+    "nyc": "^13.2.0",
     "safe-buffer": "^5.1.1",
     "standard": "^12.0.0",
     "tape": "^4.8.0"
