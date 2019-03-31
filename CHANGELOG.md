@@ -2,6 +2,14 @@
 
 ## [Unreleased][unreleased]
 
+## [6.0.2] - 2019-03-31
+
+### Changed
+
+- Upgrade `memdown` devDependency from `^3.0.0` to `^4.0.0` ([#80](https://github.com/Level/encoding-down/issues/80)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `nyc` devDependency from `^12.0.2` to `^13.2.0` ([#79](https://github.com/Level/encoding-down/issues/79)) ([**@vweevers**](https://github.com/vweevers))
+- Apply common project tweaks ([#77](https://github.com/Level/encoding-down/issues/77), [#78](https://github.com/Level/encoding-down/issues/78)) ([**@vweevers**](https://github.com/vweevers))
+
 ## [6.0.1] - 2018-12-27
 
 ### Changed
@@ -284,7 +292,9 @@
 
 :seedling: Initial release.
 
-[unreleased]: https://github.com/level/encoding-down/compare/v6.0.1...HEAD
+[unreleased]: https://github.com/level/encoding-down/compare/v6.0.2...HEAD
+
+[6.0.2]: https://github.com/level/encoding-down/compare/v6.0.1...v6.0.2
 
 [6.0.1]: https://github.com/level/encoding-down/compare/v6.0.0...v6.0.1
 
