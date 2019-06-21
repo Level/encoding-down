@@ -117,6 +117,11 @@ Iterator.prototype._next = function (cb) {
   })
 }
 
+Iterator.prototype._seek = function (key) {
+  key = this.codec.encodeKey(key, this.opts)
+  this.it.seek(key)
+}
+
 Iterator.prototype._end = function (cb) {
   this.it.end(cb)
 }

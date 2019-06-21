@@ -565,3 +565,36 @@ test('approximateSize() encodes start and end', function (t) {
 
   encdown(down).approximateSize(1, 2, noop)
 })
+
+test('can arbitrarily seek', function (t) {
+  t.plan(7)
+
+  var db = encdown(memdown(), { keyEncoding: 'json' })
+
+  var it = db.iterator({ keyAsBuffer: false, valueAsBuffer: false })
+  db.batch([
+    { type: 'put', key: { a: 'a' }, value: 'A' },
+    { type: 'put', key: { b: 'b' }, value: 'B' },
+    { type: 'put', key: { c: 'c' }, value: 'C' },
+    { type: 'put', key: { d: 'd' }, value: 'D' },
+    { type: 'put', key: { e: 'e' }, value: 'E' }
+  ], (err) => {
+    t.error(err, 'no error')
+    it.seek({ c: 'c' })
+    it.next((err, key, value) => {
+      t.error(err, 'no error')
+      t.same(key, { c: 'c' }, 'key is as expected')
+      it.seek({ d: 'd' })
+      it.next((err, key, value) => {
+        t.error(err, 'no error')
+        t.same(key, { d: 'd' }, 'key is as expected')
+        it.seek({ a: 'a' })
+        it.next((err, key, value) => {
+          t.error(err, 'no error')
+          t.same(key, { a: 'a' }, 'key is as expected')
+          t.end()
+        })
+      })
+    })
+  })
+})
