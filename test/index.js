@@ -574,13 +574,52 @@ test('encodes seek target', function (t) {
       return {
         seek: function (target) {
           t.is(target, '123', 'encoded number')
-          t.end()
         }
       }
     }
   }, { keyEncoding: 'json' })
 
-  var it = db.iterator()
+  db.iterator().seek(123)
+})
 
-  it.seek(123)
+test('encodes seek target with custom encoding', function (t) {
+  t.plan(1)
+
+  var targets = []
+  var db = encdown({
+    iterator: function () {
+      return {
+        seek: function (target) {
+          targets.push(target)
+        }
+      }
+    }
+  })
+
+  db.iterator().seek('a')
+  db.iterator({ keyEncoding: 'json' }).seek('a')
+
+  t.same(targets, ['a', '"a"'], 'encoded targets')
+})
+
+test('encodes nullish seek target', function (t) {
+  t.plan(1)
+
+  var targets = []
+  var db = encdown({
+    iterator: function () {
+      return {
+        seek: function (target) {
+          targets.push(target)
+        }
+      }
+    }
+  }, { keyEncoding: { encode: String } })
+
+  // Unlike keys, nullish targets should not be rejected;
+  // assume that the encoding gives these types meaning.
+  db.iterator().seek(null)
+  db.iterator().seek(undefined)
+
+  t.same(targets, ['null', 'undefined'], 'encoded')
 })
