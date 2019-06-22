@@ -1,6 +1,6 @@
 {
   "name": "encoding-down",
-  "version": "6.0.2",
+  "version": "6.1.0",
   "description": "LevelDOWN wrapper supporting levelup@1 encodings",
   "license": "MIT",
   "main": "index.js",
