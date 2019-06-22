@@ -565,3 +565,22 @@ test('approximateSize() encodes start and end', function (t) {
 
   encdown(down).approximateSize(1, 2, noop)
 })
+
+test('encodes seek target', function (t) {
+  t.plan(1)
+
+  var db = encdown({
+    iterator: function () {
+      return {
+        seek: function (target) {
+          t.is(target, '123', 'encoded number')
+          t.end()
+        }
+      }
+    }
+  }, { keyEncoding: 'json' })
+
+  var it = db.iterator()
+
+  it.seek(123)
+})
