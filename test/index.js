@@ -45,7 +45,7 @@ test('default utf8 encoding stringifies numbers', function (t) {
       t.is(value, '2')
     },
     batch: function (ops, options, callback) {
-      t.same(ops, [ { type: 'put', key: '3', value: '4' } ])
+      t.same(ops, [{ type: 'put', key: '3', value: '4' }])
     }
   })
 
