@@ -2,6 +2,7 @@ var test = require('tape')
 var encdown = require('..')
 var memdown = require('memdown')
 var Buffer = require('safe-buffer').Buffer
+var hasOwnProperty = Object.prototype.hasOwnProperty
 var noop = function () {}
 
 test('opens and closes the underlying db', function (t) {
@@ -419,10 +420,10 @@ test('iterator does not strip nullish range options', function (t) {
 
   encdown({
     iterator: function (options) {
-      t.ok(options.hasOwnProperty('gt'))
-      t.ok(options.hasOwnProperty('gte'))
-      t.ok(options.hasOwnProperty('lt'))
-      t.ok(options.hasOwnProperty('lte'))
+      t.ok(hasOwnProperty.call(options, 'gt'))
+      t.ok(hasOwnProperty.call(options, 'gte'))
+      t.ok(hasOwnProperty.call(options, 'lt'))
+      t.ok(hasOwnProperty.call(options, 'lte'))
 
       t.is(options.gt, undefined)
       t.is(options.gte, undefined)
@@ -442,10 +443,10 @@ test('iterator does not add nullish range options', function (t) {
 
   encdown({
     iterator: function (options) {
-      t.notOk(options.hasOwnProperty('gt'))
-      t.notOk(options.hasOwnProperty('gte'))
-      t.notOk(options.hasOwnProperty('lt'))
-      t.notOk(options.hasOwnProperty('lte'))
+      t.notOk(hasOwnProperty.call(options, 'gt'))
+      t.notOk(hasOwnProperty.call(options, 'gte'))
+      t.notOk(hasOwnProperty.call(options, 'lt'))
+      t.notOk(hasOwnProperty.call(options, 'lte'))
     }
   }).iterator({})
 })
