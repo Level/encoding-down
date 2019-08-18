@@ -77,6 +77,11 @@ DB.prototype._iterator = function (opts) {
   return new Iterator(this, opts)
 }
 
+DB.prototype._clear = function (opts, callback) {
+  opts = this.codec.encodeLtgt(opts)
+  this.db.clear(opts, callback)
+}
+
 DB.prototype.approximateSize = function (start, end, opts, cb) {
   start = this.codec.encodeKey(start, opts)
   end = this.codec.encodeKey(end, opts)
