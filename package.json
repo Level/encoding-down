@@ -22,7 +22,7 @@
     "dependency-check": "^3.3.0",
     "hallmark": "^1.0.0",
     "level-community": "^3.0.0",
-    "memdown": "^4.0.0",
+    "memdown": "^5.0.0",
     "nyc": "^14.0.0",
     "safe-buffer": "^5.1.1",
     "standard": "^13.0.1",
