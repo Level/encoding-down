@@ -401,6 +401,31 @@ test('iterator skips values if options.values is false', function (t) {
   })
 })
 
+test('iterator encodes range options', function (t) {
+  t.plan(7)
+
+  var keyEncoding = {
+    encode: function (key) {
+      return 'encoded_' + key
+    },
+    buffer: false
+  }
+
+  var db = encdown({
+    iterator: function (options) {
+      t.is(options.start, 'encoded_1')
+      t.is(options.end, 'encoded_2')
+      t.is(options.gt, 'encoded_3')
+      t.is(options.gte, 'encoded_4')
+      t.is(options.lt, 'encoded_5')
+      t.is(options.lte, 'encoded_6')
+      t.is(options.foo, 7)
+    }
+  }, { keyEncoding })
+
+  db.iterator({ start: 1, end: 2, gt: 3, gte: 4, lt: 5, lte: 6, foo: 7 })
+})
+
 test('iterator does not strip nullish range options', function (t) {
   t.plan(12)
 
@@ -623,4 +648,105 @@ test('encodes nullish seek target', function (t) {
   db.iterator().seek(undefined)
 
   t.same(targets, ['null', 'undefined'], 'encoded')
+})
+
+test('clear() forwards default options', function (t) {
+  t.plan(3)
+
+  var down = {
+    clear: function (options, callback) {
+      t.is(options.reverse, false)
+      t.is(options.limit, -1)
+      t.is(callback, noop)
+    }
+  }
+
+  encdown(down).clear(noop)
+})
+
+test('clear() forwards error from underlying store', function (t) {
+  t.plan(1)
+
+  var down = {
+    clear: function (options, cb) {
+      process.nextTick(cb, new Error('error from store'))
+    }
+  }
+
+  encdown(down).clear(function (err) {
+    t.is(err.message, 'error from store')
+  })
+})
+
+test('clear() encodes range options', function (t) {
+  t.plan(5)
+
+  var keyEncoding = {
+    encode: function (key) {
+      return 'encoded_' + key
+    },
+    buffer: false
+  }
+
+  var db = encdown({
+    clear: function (options) {
+      t.is(options.gt, 'encoded_1')
+      t.is(options.gte, 'encoded_2')
+      t.is(options.lt, 'encoded_3')
+      t.is(options.lte, 'encoded_4')
+      t.is(options.foo, 5)
+    }
+  }, { keyEncoding })
+
+  db.clear({ gt: 1, gte: 2, lt: 3, lte: 4, foo: 5 }, noop)
+})
+
+test('clear() does not strip nullish range options', function (t) {
+  t.plan(12)
+
+  encdown({
+    clear: function (options) {
+      t.is(options.gt, null)
+      t.is(options.gte, null)
+      t.is(options.lt, null)
+      t.is(options.lte, null)
+    }
+  }).clear({
+    gt: null,
+    gte: null,
+    lt: null,
+    lte: null
+  }, noop)
+
+  encdown({
+    clear: function (options) {
+      t.ok(hasOwnProperty.call(options, 'gt'))
+      t.ok(hasOwnProperty.call(options, 'gte'))
+      t.ok(hasOwnProperty.call(options, 'lt'))
+      t.ok(hasOwnProperty.call(options, 'lte'))
+
+      t.is(options.gt, undefined)
+      t.is(options.gte, undefined)
+      t.is(options.lt, undefined)
+      t.is(options.lte, undefined)
+    }
+  }).clear({
+    gt: undefined,
+    gte: undefined,
+    lt: undefined,
+    lte: undefined
+  }, noop)
+})
+
+test('clear() does not add nullish range options', function (t) {
+  t.plan(4)
+
+  encdown({
+    clear: function (options) {
+      t.notOk(hasOwnProperty.call(options, 'gt'))
+      t.notOk(hasOwnProperty.call(options, 'gte'))
+      t.notOk(hasOwnProperty.call(options, 'lt'))
+      t.notOk(hasOwnProperty.call(options, 'lte'))
+    }
+  }).clear({}, noop)
 })
