@@ -1,5 +1,17 @@
 # Changelog
 
+## [6.2.0] - 2019-09-06
+
+### Changed
+
+- Upgrade `hallmark` devDependency from `^0.1.0` to `^2.0.0` ([#85](https://github.com/Level/encoding-down/issues/85), [#91](https://github.com/Level/encoding-down/issues/91)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `standard` devDependency from `^12.0.0` to `^14.0.0` ([#84](https://github.com/Level/encoding-down/issues/84), [#90](https://github.com/Level/encoding-down/issues/90)) ([**@vweevers**](https://github.com/vweevers))
+- Upgrade `memdown` devDependency from `^4.0.0` to `^5.0.0` ([#88](https://github.com/Level/encoding-down/issues/88)) ([**@vweevers**](https://github.com/vweevers))
+
+### Added
+
+- Support `db.clear()` ([#89](https://github.com/Level/encoding-down/issues/89)) ([**@vweevers**](https://github.com/vweevers))
+
 ## [6.1.0] - 2019-06-22
 
 ### Changed
@@ -299,6 +311,8 @@
 ## 1.0.0 - 2017-01-26
 
 :seedling: Initial release.
+
+[6.2.0]: https://github.com/Level/encoding-down/compare/v6.1.0...v6.2.0
 
 [6.1.0]: https://github.com/Level/encoding-down/compare/v6.0.2...v6.1.0
 
