@@ -1,7 +1,5 @@
 # Changelog
 
-## [Unreleased][unreleased]
-
 ## [6.1.0] - 2019-06-22
 
 ### Changed
@@ -301,8 +299,6 @@
 ## 1.0.0 - 2017-01-26
 
 :seedling: Initial release.
-
-[unreleased]: https://github.com/level/encoding-down/compare/v6.1.0...HEAD
 
 [6.1.0]: https://github.com/level/encoding-down/compare/v6.0.2...v6.1.0
 
