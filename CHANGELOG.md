@@ -22,29 +22,29 @@
 
 ### Changed
 
-- Replace `remark-cli` devDependency with `hallmark` ([#76](https://github.com/level/encoding-down/issues/76)) ([**@vweevers**](https://github.com/vweevers))
+- Replace `remark-cli` devDependency with `hallmark` ([#76](https://github.com/Level/encoding-down/issues/76)) ([**@vweevers**](https://github.com/vweevers))
 
 ### Added
 
-- Increase coverage to 100% ([#75](https://github.com/level/encoding-down/issues/75)) ([**@vweevers**](https://github.com/vweevers))
+- Increase coverage to 100% ([#75](https://github.com/Level/encoding-down/issues/75)) ([**@vweevers**](https://github.com/vweevers))
 
 ### Fixed
 
-- Fix `approximateSize()` to encode `start` and `end` arguments ([#75](https://github.com/level/encoding-down/issues/75)) ([**@vweevers**](https://github.com/vweevers))
+- Fix `approximateSize()` to encode `start` and `end` arguments ([#75](https://github.com/Level/encoding-down/issues/75)) ([**@vweevers**](https://github.com/vweevers))
 
 ## [6.0.0] - 2018-12-25
 
 ### Changed
 
 - Prefer `const` over `var` in README ([**@ralphtheninja**](https://github.com/ralphtheninja))
-- Upgrade `abstract-leveldown` dependency from `^5.0.0` to `^v6.0.0` ([#68](https://github.com/level/encoding-down/issues/68)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
+- Upgrade `abstract-leveldown` dependency from `^5.0.0` to `^v6.0.0` ([#68](https://github.com/Level/encoding-down/issues/68)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
 - Upgrade `standard` devDependency from `^11.0.0` to `^v12.0.0` ([**@ralphtheninja**](https://github.com/ralphtheninja))
-- Use full link references in README ([#60](https://github.com/level/encoding-down/issues/60)) ([**@vweevers**](https://github.com/vweevers))
+- Use full link references in README ([#60](https://github.com/Level/encoding-down/issues/60)) ([**@vweevers**](https://github.com/vweevers))
 
 ### Added
 
-- Explain serialization ([#72](https://github.com/level/encoding-down/issues/72)) ([**@vweevers**](https://github.com/vweevers))
-- Add `nyc` and `coveralls` ([#64](https://github.com/level/encoding-down/issues/64)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
+- Explain serialization ([#72](https://github.com/Level/encoding-down/issues/72)) ([**@vweevers**](https://github.com/vweevers))
+- Add `nyc` and `coveralls` ([#64](https://github.com/Level/encoding-down/issues/64)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
 
 ### Removed
 
@@ -300,72 +300,72 @@
 
 :seedling: Initial release.
 
-[6.1.0]: https://github.com/level/encoding-down/compare/v6.0.2...v6.1.0
+[6.1.0]: https://github.com/Level/encoding-down/compare/v6.0.2...v6.1.0
 
-[6.0.2]: https://github.com/level/encoding-down/compare/v6.0.1...v6.0.2
+[6.0.2]: https://github.com/Level/encoding-down/compare/v6.0.1...v6.0.2
 
-[6.0.1]: https://github.com/level/encoding-down/compare/v6.0.0...v6.0.1
+[6.0.1]: https://github.com/Level/encoding-down/compare/v6.0.0...v6.0.1
 
-[6.0.0]: https://github.com/level/encoding-down/compare/v5.0.4...v6.0.0
+[6.0.0]: https://github.com/Level/encoding-down/compare/v5.0.4...v6.0.0
 
-[5.0.4]: https://github.com/level/encoding-down/compare/v5.0.3...v5.0.4
+[5.0.4]: https://github.com/Level/encoding-down/compare/v5.0.3...v5.0.4
 
-[5.0.3]: https://github.com/level/encoding-down/compare/v5.0.2...v5.0.3
+[5.0.3]: https://github.com/Level/encoding-down/compare/v5.0.2...v5.0.3
 
-[5.0.2]: https://github.com/level/encoding-down/compare/v5.0.1...v5.0.2
+[5.0.2]: https://github.com/Level/encoding-down/compare/v5.0.1...v5.0.2
 
-[5.0.1]: https://github.com/level/encoding-down/compare/v5.0.0...v5.0.1
+[5.0.1]: https://github.com/Level/encoding-down/compare/v5.0.0...v5.0.1
 
-[5.0.0]: https://github.com/level/encoding-down/compare/v4.0.0...v5.0.0
+[5.0.0]: https://github.com/Level/encoding-down/compare/v4.0.0...v5.0.0
 
-[4.0.1]: https://github.com/level/encoding-down/compare/v4.0.0...v4.0.1
+[4.0.1]: https://github.com/Level/encoding-down/compare/v4.0.0...v4.0.1
 
-[4.0.0]: https://github.com/level/encoding-down/compare/v3.0.1...v4.0.0
+[4.0.0]: https://github.com/Level/encoding-down/compare/v3.0.1...v4.0.0
 
-[3.0.1]: https://github.com/level/encoding-down/compare/v3.0.0...v3.0.1
+[3.0.1]: https://github.com/Level/encoding-down/compare/v3.0.0...v3.0.1
 
-[3.0.0]: https://github.com/level/encoding-down/compare/v2.3.4...v3.0.0
+[3.0.0]: https://github.com/Level/encoding-down/compare/v2.3.4...v3.0.0
 
-[2.3.4]: https://github.com/level/encoding-down/compare/v2.3.3...v2.3.4
+[2.3.4]: https://github.com/Level/encoding-down/compare/v2.3.3...v2.3.4
 
-[2.3.3]: https://github.com/level/encoding-down/compare/v2.3.2...v2.3.3
+[2.3.3]: https://github.com/Level/encoding-down/compare/v2.3.2...v2.3.3
 
-[2.3.2]: https://github.com/level/encoding-down/compare/v2.3.1...v2.3.2
+[2.3.2]: https://github.com/Level/encoding-down/compare/v2.3.1...v2.3.2
 
-[2.3.1]: https://github.com/level/encoding-down/compare/v2.3.0...v2.3.1
+[2.3.1]: https://github.com/Level/encoding-down/compare/v2.3.0...v2.3.1
 
-[2.3.0]: https://github.com/level/encoding-down/compare/v2.2.1...v2.3.0
+[2.3.0]: https://github.com/Level/encoding-down/compare/v2.2.1...v2.3.0
 
-[2.2.1]: https://github.com/level/encoding-down/compare/v2.2.0...v2.2.1
+[2.2.1]: https://github.com/Level/encoding-down/compare/v2.2.0...v2.2.1
 
-[2.2.0]: https://github.com/level/encoding-down/compare/v2.1.5...v2.2.0
+[2.2.0]: https://github.com/Level/encoding-down/compare/v2.1.5...v2.2.0
 
-[2.1.5]: https://github.com/level/encoding-down/compare/v2.1.4...v2.1.5
+[2.1.5]: https://github.com/Level/encoding-down/compare/v2.1.4...v2.1.5
 
-[2.1.4]: https://github.com/level/encoding-down/compare/v2.1.3...v2.1.4
+[2.1.4]: https://github.com/Level/encoding-down/compare/v2.1.3...v2.1.4
 
-[2.1.3]: https://github.com/level/encoding-down/compare/v2.1.2...v2.1.3
+[2.1.3]: https://github.com/Level/encoding-down/compare/v2.1.2...v2.1.3
 
-[2.1.2]: https://github.com/level/encoding-down/compare/v2.1.1...v2.1.2
+[2.1.2]: https://github.com/Level/encoding-down/compare/v2.1.1...v2.1.2
 
-[2.1.1]: https://github.com/level/encoding-down/compare/v2.1.0...v2.1.1
+[2.1.1]: https://github.com/Level/encoding-down/compare/v2.1.0...v2.1.1
 
-[2.1.0]: https://github.com/level/encoding-down/compare/v2.0.8...v2.1.0
+[2.1.0]: https://github.com/Level/encoding-down/compare/v2.0.8...v2.1.0
 
-[2.0.8]: https://github.com/level/encoding-down/compare/v2.0.7...v2.0.8
+[2.0.8]: https://github.com/Level/encoding-down/compare/v2.0.7...v2.0.8
 
-[2.0.7]: https://github.com/level/encoding-down/compare/v2.0.6...v2.0.7
+[2.0.7]: https://github.com/Level/encoding-down/compare/v2.0.6...v2.0.7
 
-[2.0.6]: https://github.com/level/encoding-down/compare/v2.0.5...v2.0.6
+[2.0.6]: https://github.com/Level/encoding-down/compare/v2.0.5...v2.0.6
 
-[2.0.5]: https://github.com/level/encoding-down/compare/v2.0.4...v2.0.5
+[2.0.5]: https://github.com/Level/encoding-down/compare/v2.0.4...v2.0.5
 
-[2.0.4]: https://github.com/level/encoding-down/compare/v2.0.3...v2.0.4
+[2.0.4]: https://github.com/Level/encoding-down/compare/v2.0.3...v2.0.4
 
-[2.0.3]: https://github.com/level/encoding-down/compare/v2.0.2...v2.0.3
+[2.0.3]: https://github.com/Level/encoding-down/compare/v2.0.2...v2.0.3
 
-[2.0.2]: https://github.com/level/encoding-down/compare/v2.0.1...v2.0.2
+[2.0.2]: https://github.com/Level/encoding-down/compare/v2.0.1...v2.0.2
 
-[2.0.1]: https://github.com/level/encoding-down/compare/v2.0.0...v2.0.1
+[2.0.1]: https://github.com/Level/encoding-down/compare/v2.0.0...v2.0.1
 
-[2.0.0]: https://github.com/level/encoding-down/compare/v1.0.0...v2.0.0
+[2.0.0]: https://github.com/Level/encoding-down/compare/v1.0.0...v2.0.0
