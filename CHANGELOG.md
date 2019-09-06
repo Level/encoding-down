@@ -82,12 +82,6 @@
 
 - Override `_setupIteratorOptions` to not clobber ranges ([**@ralphtheninja**](https://github.com/ralphtheninja), [**@dominictarr**](https://github.com/dominictarr))
 
-## [4.0.1] - 2018-05-19
-
-### Changed
-
-- Override `_setupIteratorOptions` to not clobber ranges ([**@ralphtheninja**](https://github.com/ralphtheninja), [**@dominictarr**](https://github.com/dominictarr))
-
 ## [5.0.0] - 2018-05-13
 
 ### Added
@@ -102,6 +96,12 @@
 ### Removed
 
 - Remove 4 from Travis ([**@ralphtheninja**](https://github.com/ralphtheninja))
+
+## [4.0.1] - 2018-05-19
+
+### Changed
+
+- Override `_setupIteratorOptions` to not clobber ranges ([**@ralphtheninja**](https://github.com/ralphtheninja), [**@dominictarr**](https://github.com/dominictarr))
 
 ## [4.0.0] - 2018-02-12
 
@@ -316,7 +316,7 @@
 
 [5.0.1]: https://github.com/Level/encoding-down/compare/v5.0.0...v5.0.1
 
-[5.0.0]: https://github.com/Level/encoding-down/compare/v4.0.0...v5.0.0
+[5.0.0]: https://github.com/Level/encoding-down/compare/v4.0.1...v5.0.0
 
 [4.0.1]: https://github.com/Level/encoding-down/compare/v4.0.0...v4.0.1
 
