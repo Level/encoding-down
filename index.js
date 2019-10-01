@@ -6,12 +6,25 @@ var AbstractIterator = require('abstract-leveldown').AbstractIterator
 var inherits = require('inherits')
 var Codec = require('level-codec')
 var EncodingError = require('level-errors').EncodingError
+var specialMethods = ['approximateSize', 'compactRange']
 
 module.exports = DB.default = DB
 
 function DB (db, opts) {
   if (!(this instanceof DB)) return new DB(db, opts)
-  AbstractLevelDOWN.call(this, '')
+  if (db.supports && db.supports.encodings) throw new Error('Double encoding')
+
+  AbstractLevelDOWN.call(this, db.supports)
+  this.supports.encodings = true
+
+  // TODO (future major): remove this fallback
+  specialMethods.forEach(function (m) {
+    if (typeof db[m] === 'function' && !this.supports.additionalMethods[m]) {
+      this.supports.additionalMethods[m] = {
+        args: [{ type: 'key' }, { type: 'key' }, { type: 'options' }]
+      }
+    }
+  }, this)
 
   opts = opts || {}
   if (typeof opts.keyEncoding === 'undefined') opts.keyEncoding = 'utf8'
@@ -19,6 +32,29 @@ function DB (db, opts) {
 
   this.db = db
   this.codec = new Codec(opts)
+
+  Object.keys(this.supports.additionalMethods).forEach(function (m) {
+    if (this[m] != null) return
+
+    var signature = this.supports.additionalMethods[m]
+    var args = (signature && signature.args) || []
+
+    this[m] = function () {
+      var i = Math.min(arguments.length, args.length)
+      var opts
+
+      while (i--) {
+        if (args[i].type === 'options' && !opts && isOptions(arguments[i])) {
+          opts = arguments[i]
+          arguments[i] = this.codec.encodeLtgt(opts)
+        } else if (args[i].type === 'key') {
+          arguments[i] = this.codec.encodeKey(arguments[i], opts)
+        }
+      }
+
+      return this.db[m].apply(this.db, arguments)
+    }
+  }, this)
 }
 
 inherits(DB, AbstractLevelDOWN)
@@ -84,11 +120,17 @@ DB.prototype._clear = function (opts, callback) {
   this.db.clear(opts, callback)
 }
 
-DB.prototype.approximateSize = function (start, end, opts, cb) {
-  start = this.codec.encodeKey(start, opts)
-  end = this.codec.encodeKey(end, opts)
-  return this.db.approximateSize(start, end, opts, cb)
-}
+// DB.prototype.approximateSize = function (start, end, opts, cb) {
+//   start = this.codec.encodeKey(start, opts)
+//   end = this.codec.encodeKey(end, opts)
+//   return this.db.approximateSize(start, end, opts, cb)
+// }
+//
+// DB.prototype.compactRange = function (start, end, opts, cb) {
+//   start = this.codec.encodeKey(start, opts)
+//   end = this.codec.encodeKey(end, opts)
+//   return this.db.compactRange(start, end, opts, cb)
+// }
 
 function Iterator (db, opts) {
   AbstractIterator.call(this, db)
@@ -158,4 +200,8 @@ Batch.prototype._clear = function () {
 
 Batch.prototype._write = function (opts, cb) {
   this.batch.write(opts, cb)
+}
+
+function isOptions (o) {
+  return typeof o === 'object' && o !== null
 }

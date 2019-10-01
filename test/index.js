@@ -579,7 +579,7 @@ test('iterator catches decoding error from valueEncoding', function (t) {
   })
 })
 
-test('approximateSize() encodes start and end', function (t) {
+test('encodes start and end of approximateSize()', function (t) {
   t.plan(2)
 
   var down = {
@@ -590,6 +590,36 @@ test('approximateSize() encodes start and end', function (t) {
   }
 
   encdown(down).approximateSize(1, 2, noop)
+})
+
+test('encodes start and end of approximateSize() with custom encoding', function (t) {
+  t.plan(2)
+
+  var down = {
+    approximateSize: function (start, end) {
+      t.is(start, '"a"')
+      t.is(end, '"b"')
+    }
+  }
+
+  encdown(down).approximateSize('a', 'b', { keyEncoding: 'json' }, noop)
+})
+
+test('encodes options of additionalMethod', function (t) {
+  t.plan(1)
+
+  var down = {
+    supports: {
+      additionalMethods: {
+        foo: { args: [{ type: 'options' }] }
+      }
+    },
+    foo: function (options) {
+      t.is(options.gt, '"a"')
+    }
+  }
+
+  encdown(down).foo({ gt: 'a', keyEncoding: 'json' })
 })
 
 test('encodes seek target', function (t) {
