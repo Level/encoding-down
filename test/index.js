@@ -579,17 +579,68 @@ test('iterator catches decoding error from valueEncoding', function (t) {
   })
 })
 
-test('approximateSize() encodes start and end', function (t) {
-  t.plan(2)
+test('proxies approximateSize() if it exists', function (t) {
+  t.is(typeof encdown({ approximateSize: noop }).approximateSize, 'function')
+  t.ok(encdown({ approximateSize: noop }).supports.additionalMethods.approximateSize)
+  t.is(encdown({}).approximateSize, undefined)
+  t.notOk(encdown({}).supports.additionalMethods.approximateSize)
+  t.end()
+})
 
-  var down = {
+test('proxies compactRange() if it exists', function (t) {
+  t.is(typeof encdown({ compactRange: noop }).compactRange, 'function')
+  t.ok(encdown({ compactRange: noop }).supports.additionalMethods.compactRange)
+  t.is(encdown({}).compactRange, undefined)
+  t.notOk(encdown({}).supports.additionalMethods.compactRange)
+  t.end()
+})
+
+test('encodes start and end of approximateSize()', function (t) {
+  var db = encdown({
     approximateSize: function (start, end) {
       t.is(start, '1')
       t.is(end, '2')
+      t.end()
     }
-  }
+  })
 
-  encdown(down).approximateSize(1, 2, noop)
+  db.approximateSize(1, 2, noop)
+})
+
+test('encodes start and end of compactRange()', function (t) {
+  var db = encdown({
+    compactRange: function (start, end) {
+      t.is(start, '1')
+      t.is(end, '2')
+      t.end()
+    }
+  })
+
+  db.compactRange(1, 2, noop)
+})
+
+test('encodes start and end of approximateSize() with custom encoding', function (t) {
+  var db = encdown({
+    approximateSize: function (start, end) {
+      t.is(start, '"a"')
+      t.is(end, '"b"')
+      t.end()
+    }
+  })
+
+  db.approximateSize('a', 'b', { keyEncoding: 'json' }, noop)
+})
+
+test('encodes start and end of compactRange() with custom encoding', function (t) {
+  var db = encdown({
+    compactRange: function (start, end) {
+      t.is(start, '"a"')
+      t.is(end, '"b"')
+      t.end()
+    }
+  })
+
+  db.compactRange('a', 'b', { keyEncoding: 'json' }, noop)
 })
 
 test('encodes seek target', function (t) {

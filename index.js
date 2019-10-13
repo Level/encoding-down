@@ -6,12 +6,35 @@ var AbstractIterator = require('abstract-leveldown').AbstractIterator
 var inherits = require('inherits')
 var Codec = require('level-codec')
 var EncodingError = require('level-errors').EncodingError
+var rangeMethods = ['approximateSize', 'compactRange']
 
 module.exports = DB.default = DB
 
 function DB (db, opts) {
   if (!(this instanceof DB)) return new DB(db, opts)
-  AbstractLevelDOWN.call(this, '')
+
+  var manifest = db.supports || {}
+  var additionalMethods = manifest.additionalMethods || {}
+
+  AbstractLevelDOWN.call(this, manifest)
+
+  this.supports.encodings = true
+  this.supports.additionalMethods = {}
+
+  rangeMethods.forEach(function (m) {
+    // TODO (future major): remove this fallback
+    var fallback = typeof db[m] === 'function'
+
+    if (additionalMethods[m] || fallback) {
+      this.supports.additionalMethods[m] = true
+
+      this[m] = function (start, end, opts, cb) {
+        start = this.codec.encodeKey(start, opts)
+        end = this.codec.encodeKey(end, opts)
+        return this.db[m](start, end, opts, cb)
+      }
+    }
+  }, this)
 
   opts = opts || {}
   if (typeof opts.keyEncoding === 'undefined') opts.keyEncoding = 'utf8'
@@ -82,12 +105,6 @@ DB.prototype._iterator = function (opts) {
 DB.prototype._clear = function (opts, callback) {
   opts = this.codec.encodeLtgt(opts)
   this.db.clear(opts, callback)
-}
-
-DB.prototype.approximateSize = function (start, end, opts, cb) {
-  start = this.codec.encodeKey(start, opts)
-  end = this.codec.encodeKey(end, opts)
-  return this.db.approximateSize(start, end, opts, cb)
 }
 
 function Iterator (db, opts) {
