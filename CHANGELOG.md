@@ -1,5 +1,12 @@
 # Changelog
 
+## [6.3.0] - 2019-10-13
+
+### Added
+
+- Add manifest ([Level/community#83](https://github.com/Level/community/issues/83)) and encode `compactRange()` ([#93](https://github.com/Level/encoding-down/issues/93)) ([**@vweevers**](https://github.com/vweevers))
+- Add `type` property for `reachdown` ([Level/community#82](https://github.com/Level/community/issues/82)) ([`8a23848`](https://github.com/Level/encoding-down/commit/8a23848)) ([**@vweevers**](https://github.com/vweevers))
+
 ## [6.2.0] - 2019-09-06
 
 ### Changed
@@ -311,6 +318,8 @@
 ## 1.0.0 - 2017-01-26
 
 :seedling: Initial release.
+
+[6.3.0]: https://github.com/Level/encoding-down/compare/v6.2.0...v6.3.0
 
 [6.2.0]: https://github.com/Level/encoding-down/compare/v6.1.0...v6.2.0
 
