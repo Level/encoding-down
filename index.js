@@ -13,16 +13,21 @@ module.exports = DB.default = DB
 function DB (db, opts) {
   if (!(this instanceof DB)) return new DB(db, opts)
 
-  AbstractLevelDOWN.call(this, db.supports)
+  var manifest = db.supports || {}
+  var additionalMethods = manifest.additionalMethods || {}
+
+  AbstractLevelDOWN.call(this, manifest)
+
   this.supports.encodings = true
+  this.supports.additionalMethods = {}
 
   rangeMethods.forEach(function (m) {
     // TODO (future major): remove this fallback
-    if (typeof db[m] === 'function' && !this.supports.additionalMethods[m]) {
-      this.supports.additionalMethods[m] = true
-    }
+    var fallback = typeof db[m] === 'function'
 
-    if (this.supports.additionalMethods[m]) {
+    if (additionalMethods[m] || fallback) {
+      this.supports.additionalMethods[m] = true
+
       this[m] = function (start, end, opts, cb) {
         start = this.codec.encodeKey(start, opts)
         end = this.codec.encodeKey(end, opts)
