@@ -161,14 +161,14 @@ function Batch (db, codec) {
 
 inherits(Batch, AbstractChainedBatch)
 
-Batch.prototype._put = function (key, value) {
-  key = this.codec.encodeKey(key)
-  value = this.codec.encodeValue(value)
+Batch.prototype._put = function (key, value, options) {
+  key = this.codec.encodeKey(key, options)
+  value = this.codec.encodeValue(value, options)
   this.batch.put(key, value)
 }
 
-Batch.prototype._del = function (key) {
-  key = this.codec.encodeKey(key)
+Batch.prototype._del = function (key, options) {
+  key = this.codec.encodeKey(key, options)
   this.batch.del(key)
 }
 

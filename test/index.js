@@ -205,6 +205,28 @@ test('chainedBatch.put() encodes key and value', function (t) {
   encdown(down).batch().put(1, 2)
 })
 
+test('chainedBatch.put() takes custom encoding', function (t) {
+  t.plan(4)
+
+  const expectedKeys = ['"a"', 'a']
+  const expectedValues = ['"b"', 'b']
+
+  const down = {
+    batch: function () {
+      return {
+        put: function (key, value) {
+          t.is(key, expectedKeys.shift())
+          t.is(value, expectedValues.shift())
+        }
+      }
+    }
+  }
+
+  encdown(down).batch()
+    .put('a', 'b', { keyEncoding: 'json', valueEncoding: 'json' })
+    .put('a', 'b')
+})
+
 test('chainedBatch.del() encodes key', function (t) {
   t.plan(1)
 
@@ -219,6 +241,26 @@ test('chainedBatch.del() encodes key', function (t) {
   }
 
   encdown(down).batch().del(1)
+})
+
+test('chainedBatch.del() takes custom encoding', function (t) {
+  t.plan(2)
+
+  const expectedKeys = ['"a"', 'a']
+
+  const down = {
+    batch: function () {
+      return {
+        del: function (key) {
+          t.is(key, expectedKeys.shift())
+        }
+      }
+    }
+  }
+
+  encdown(down).batch()
+    .del('a', { keyEncoding: 'json' })
+    .del('a')
 })
 
 test('chainedBatch.clear() is forwarded to underlying store', function (t) {
