@@ -3,7 +3,7 @@
 const test = require('tape')
 const encdown = require('..')
 const memdown = require('memdown')
-const Buffer = require('safe-buffer').Buffer
+const Buffer = require('buffer').Buffer
 const hasOwnProperty = Object.prototype.hasOwnProperty
 const noop = function () {}
 
