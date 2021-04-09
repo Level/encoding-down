@@ -1,5 +1,22 @@
 # Changelog
 
+## [7.0.0] - 2021-04-09
+
+### Changed
+
+- **Breaking:** drop node 6 and 8 ([Level/community#98](https://github.com/Level/community/issues/98)) ([`5c6752f`](https://github.com/Level/encoding-down/commit/5c6752f)) (Vincent Weevers)
+- **Breaking:** modernize syntax and bump `standard` ([Level/community#98](https://github.com/Level/community/issues/98)) ([`404f20f`](https://github.com/Level/encoding-down/commit/404f20f)) (Vincent Weevers)
+- Bump `abstract-leveldown`, `level-codec` and `level-errors` ([`83556fd`](https://github.com/Level/encoding-down/commit/83556fd)) (Vincent Weevers)
+- Add `files` to `package.json` ([`103fe95`](https://github.com/Level/encoding-down/commit/103fe95)) (Vincent Weevers)
+
+### Added
+
+- Support encoding options on chained batch `put()` and `del()` ([`9690e52`](https://github.com/Level/encoding-down/commit/9690e52)) ([Level/levelup#633](https://github.com/Level/levelup/issues/633)) (Vincent Weevers)
+
+### Removed
+
+- Remove default export ([Level/community#87](https://github.com/Level/community/issues/87)) ([`1111866`](https://github.com/Level/encoding-down/commit/1111866)) (Vincent Weevers)
+
 ## [6.3.0] - 2019-10-13
 
 ### Added
@@ -318,6 +335,8 @@
 ## 1.0.0 - 2017-01-26
 
 :seedling: Initial release.
+
+[7.0.0]: https://github.com/Level/encoding-down/compare/v6.3.0...v7.0.0
 
 [6.3.0]: https://github.com/Level/encoding-down/compare/v6.2.0...v6.3.0
 

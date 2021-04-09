@@ -2,15 +2,36 @@
 
 This document describes breaking changes and how to upgrade. For a complete list of changes including minor and patch releases, please refer to the [changelog](CHANGELOG.md).
 
-## v6
+## 7.0.0
+
+Legacy range options have been removed ([Level/community#86](https://github.com/Level/community/issues/86)). If you previously did:
+
+```js
+db.iterator({ start: 'a', end: 'z' })
+```
+
+An error would now be thrown and you must instead do:
+
+```js
+db.iterator({ gte: 'a', lte: 'z' })
+```
+
+This release also drops support of legacy runtime environments ([Level/community#98](https://github.com/Level/community/issues/98)):
+
+- Node.js 6 and 8
+- Internet Explorer 11
+- Safari 9-11
+- Stock Android browser (AOSP).
+
+## 6.0.0
 
  Upgraded `abstract-leveldown` to `v6.0.0`. Please see the corresponding [changelog entry](https://github.com/Level/abstract-leveldown/blob/master/CHANGELOG.md#600---2018-10-20) for more information.
 
-## v5
+## 5.0.0
 
 Dropped support for node 4. No other breaking changes.
 
-## v4
+## 4.0.0
 
 Dropped support for node 7.
 
@@ -20,6 +41,6 @@ This major release contains an upgrade to `abstract-leveldown` with a [breaking 
 
 If you previously passed arrays to `.batch()` that contained `undefined` or `null`, they would be silently ignored. Now this will produce an error.
 
-## v3
+## 3.0.0
 
 Dropped support for node 0.12. No other breaking changes.

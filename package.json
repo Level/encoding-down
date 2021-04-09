@@ -1,6 +1,6 @@
 {
   "name": "encoding-down",
-  "version": "6.3.0",
+  "version": "7.0.0",
   "description": "An abstract-leveldown implementation that wraps another store to encode keys and values",
   "license": "MIT",
   "main": "index.js",
