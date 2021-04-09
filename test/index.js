@@ -1,12 +1,14 @@
-var test = require('tape')
-var encdown = require('..')
-var memdown = require('memdown')
-var Buffer = require('safe-buffer').Buffer
-var hasOwnProperty = Object.prototype.hasOwnProperty
-var noop = function () {}
+'use strict'
+
+const test = require('tape')
+const encdown = require('..')
+const memdown = require('memdown')
+const Buffer = require('safe-buffer').Buffer
+const hasOwnProperty = Object.prototype.hasOwnProperty
+const noop = function () {}
 
 test('opens and closes the underlying db', function (t) {
-  var _db = {
+  const _db = {
     open: function (opts, cb) {
       t.pass('open called')
       setImmediate(cb)
@@ -16,7 +18,7 @@ test('opens and closes the underlying db', function (t) {
       setImmediate(cb)
     }
   }
-  var db = encdown(_db)
+  const db = encdown(_db)
   db.open(function (err) {
     t.error(err, 'no error')
     db.close(function (err) {
@@ -27,7 +29,7 @@ test('opens and closes the underlying db', function (t) {
 })
 
 test('encodings default to utf8', function (t) {
-  var db = encdown(memdown())
+  const db = encdown(memdown())
   t.ok(db.db, '.db should be set')
   t.ok(db.codec, '.codec should be set')
   t.deepEqual(db.codec.opts, {
@@ -40,7 +42,7 @@ test('encodings default to utf8', function (t) {
 test('default utf8 encoding stringifies numbers', function (t) {
   t.plan(3)
 
-  var db = encdown({
+  const db = encdown({
     put: function (key, value, callback) {
       t.is(key, '1')
       t.is(value, '2')
@@ -55,11 +57,11 @@ test('default utf8 encoding stringifies numbers', function (t) {
 })
 
 test('test safe decode in get', function (t) {
-  var memdb = memdown()
-  var db = encdown(memdb, { valueEncoding: 'utf8' })
+  const memdb = memdown()
+  const db = encdown(memdb, { valueEncoding: 'utf8' })
   db.put('foo', 'this {} is [] not : json', function (err) {
     t.error(err, 'no error')
-    var db2 = encdown(memdb, { valueEncoding: 'json' })
+    const db2 = encdown(memdb, { valueEncoding: 'json' })
     db2.get('foo', function (err, value) {
       t.equals('EncodingError', err.name)
       memdb.close(t.end.bind(t))
@@ -68,12 +70,12 @@ test('test safe decode in get', function (t) {
 })
 
 test('can decode from string to json', function (t) {
-  var memdb = memdown()
-  var db = encdown(memdb, { valueEncoding: 'utf8' })
-  var data = { thisis: 'json' }
+  const memdb = memdown()
+  const db = encdown(memdb, { valueEncoding: 'utf8' })
+  const data = { thisis: 'json' }
   db.put('foo', JSON.stringify(data), function (err) {
     t.error(err, 'no error')
-    var db2 = encdown(memdb, { valueEncoding: 'json' })
+    const db2 = encdown(memdb, { valueEncoding: 'json' })
     db2.get('foo', function (err, value) {
       t.error(err, 'no error')
       t.deepEqual(value, data, 'JSON.parse')
@@ -83,12 +85,12 @@ test('can decode from string to json', function (t) {
 })
 
 test('can decode from json to string', function (t) {
-  var memdb = memdown()
-  var db = encdown(memdb, { valueEncoding: 'json' })
-  var data = { thisis: 'json' }
+  const memdb = memdown()
+  const db = encdown(memdb, { valueEncoding: 'json' })
+  const data = { thisis: 'json' }
   db.put('foo', data, function (err) {
     t.error(err, 'no error')
-    var db2 = encdown(memdb, { valueEncoding: 'utf8' })
+    const db2 = encdown(memdb, { valueEncoding: 'utf8' })
     db2.get('foo', function (err, value) {
       t.error(err, 'no error')
       t.deepEqual(value, JSON.stringify(data), 'JSON.stringify')
@@ -98,7 +100,7 @@ test('can decode from json to string', function (t) {
 })
 
 test('binary encoding, using batch', function (t) {
-  var data = [
+  const data = [
     {
       type: 'put',
       key: Buffer.from([1, 2, 3]),
@@ -110,7 +112,7 @@ test('binary encoding, using batch', function (t) {
       value: Buffer.from([10, 11, 12])
     }
   ]
-  var db = encdown(memdown(), {
+  const db = encdown(memdown(), {
     keyEncoding: 'binary',
     valueEncoding: 'binary'
   })
@@ -131,13 +133,13 @@ test('binary encoding, using batch', function (t) {
 test('default encoding retrieves a string from underlying store', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     get: function (key, options, cb) {
       t.is(options.asBuffer, false, '.asBuffer is false')
     }
   }
 
-  var db = encdown(down)
+  const db = encdown(down)
 
   db.get('key', noop)
 })
@@ -145,13 +147,13 @@ test('default encoding retrieves a string from underlying store', function (t) {
 test('custom value encoding that retrieves a string from underlying store', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     get: function (key, options, cb) {
       t.is(options.asBuffer, false, '.asBuffer is false')
     }
   }
 
-  var db = encdown(down, {
+  const db = encdown(down, {
     valueEncoding: {
       buffer: false
     }
@@ -163,7 +165,7 @@ test('custom value encoding that retrieves a string from underlying store', func
 test('get() forwards error from underlying store', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     get: function (key, options, cb) {
       process.nextTick(cb, new Error('error from store'))
     }
@@ -177,7 +179,7 @@ test('get() forwards error from underlying store', function (t) {
 test('_del() encodes key', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     del: function (key, options, cb) {
       t.is(key, '2')
     }
@@ -189,7 +191,7 @@ test('_del() encodes key', function (t) {
 test('chainedBatch.put() encodes key and value', function (t) {
   t.plan(2)
 
-  var down = {
+  const down = {
     batch: function () {
       return {
         put: function (key, value) {
@@ -206,7 +208,7 @@ test('chainedBatch.put() encodes key and value', function (t) {
 test('chainedBatch.del() encodes key', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     batch: function () {
       return {
         del: function (key) {
@@ -222,7 +224,7 @@ test('chainedBatch.del() encodes key', function (t) {
 test('chainedBatch.clear() is forwarded to underlying store', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     batch: function () {
       return {
         clear: function () {
@@ -238,7 +240,7 @@ test('chainedBatch.clear() is forwarded to underlying store', function (t) {
 test('chainedBatch.write() is forwarded to underlying store', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     batch: function () {
       return {
         write: function () {
@@ -254,13 +256,13 @@ test('chainedBatch.write() is forwarded to underlying store', function (t) {
 test('custom value encoding that retrieves a buffer from underlying store', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     get: function (key, options, cb) {
       t.is(options.asBuffer, true, '.asBuffer is true')
     }
   }
 
-  var db = encdown(down, {
+  const db = encdown(down, {
     valueEncoding: {
       buffer: true
     }
@@ -272,7 +274,7 @@ test('custom value encoding that retrieves a buffer from underlying store', func
 test('.keyAsBuffer and .valueAsBuffer defaults to false', function (t) {
   t.plan(2)
 
-  var down = {
+  const down = {
     iterator: function (options) {
       t.is(options.keyAsBuffer, false)
       t.is(options.valueAsBuffer, false)
@@ -285,14 +287,14 @@ test('.keyAsBuffer and .valueAsBuffer defaults to false', function (t) {
 test('.keyAsBuffer and .valueAsBuffer as buffers if encoding says so', function (t) {
   t.plan(2)
 
-  var down = {
+  const down = {
     iterator: function (options) {
       t.is(options.keyAsBuffer, true)
       t.is(options.valueAsBuffer, true)
     }
   }
 
-  var db = encdown(down, {
+  const db = encdown(down, {
     keyEncoding: {
       buffer: true
     },
@@ -307,14 +309,14 @@ test('.keyAsBuffer and .valueAsBuffer as buffers if encoding says so', function 
 test('.keyAsBuffer and .valueAsBuffer as strings if encoding says so', function (t) {
   t.plan(2)
 
-  var down = {
+  const down = {
     iterator: function (options) {
       t.is(options.keyAsBuffer, false)
       t.is(options.valueAsBuffer, false)
     }
   }
 
-  var db = encdown(down, {
+  const db = encdown(down, {
     keyEncoding: {
       buffer: false
     },
@@ -329,7 +331,7 @@ test('.keyAsBuffer and .valueAsBuffer as strings if encoding says so', function 
 test('iterator options.keys and options.values default to true', function (t) {
   t.plan(2)
 
-  var down = {
+  const down = {
     iterator: function (options) {
       t.is(options.keys, true)
       t.is(options.values, true)
@@ -342,7 +344,7 @@ test('iterator options.keys and options.values default to true', function (t) {
 test('iterator skips keys if options.keys is false', function (t) {
   t.plan(4)
 
-  var down = {
+  const down = {
     iterator: function (options) {
       t.is(options.keys, false)
 
@@ -354,14 +356,14 @@ test('iterator skips keys if options.keys is false', function (t) {
     }
   }
 
-  var keyEncoding = {
+  const keyEncoding = {
     decode: function (key) {
       t.fail('should not be called')
     }
   }
 
-  var db = encdown(down, { keyEncoding: keyEncoding })
-  var it = db.iterator({ keys: false })
+  const db = encdown(down, { keyEncoding })
+  const it = db.iterator({ keys: false })
 
   it.next(function (err, key, value) {
     t.ifError(err, 'no next error')
@@ -373,7 +375,7 @@ test('iterator skips keys if options.keys is false', function (t) {
 test('iterator skips values if options.values is false', function (t) {
   t.plan(4)
 
-  var down = {
+  const down = {
     iterator: function (options) {
       t.is(options.values, false)
 
@@ -385,14 +387,14 @@ test('iterator skips values if options.values is false', function (t) {
     }
   }
 
-  var valueEncoding = {
+  const valueEncoding = {
     decode: function (value) {
       t.fail('should not be called')
     }
   }
 
-  var db = encdown(down, { valueEncoding: valueEncoding })
-  var it = db.iterator({ values: false })
+  const db = encdown(down, { valueEncoding })
+  const it = db.iterator({ values: false })
 
   it.next(function (err, key, value) {
     t.ifError(err, 'no next error')
@@ -404,14 +406,14 @@ test('iterator skips values if options.values is false', function (t) {
 test('iterator encodes range options', function (t) {
   t.plan(7)
 
-  var keyEncoding = {
+  const keyEncoding = {
     encode: function (key) {
       return 'encoded_' + key
     },
     buffer: false
   }
 
-  var db = encdown({
+  const db = encdown({
     iterator: function (options) {
       t.is(options.start, 'encoded_1')
       t.is(options.end, 'encoded_2')
@@ -479,7 +481,7 @@ test('iterator does not add nullish range options', function (t) {
 test('iterator forwards next() error from underlying iterator', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     iterator: function () {
       return {
         next: function (callback) {
@@ -489,8 +491,8 @@ test('iterator forwards next() error from underlying iterator', function (t) {
     }
   }
 
-  var db = encdown(down)
-  var it = db.iterator()
+  const db = encdown(down)
+  const it = db.iterator()
 
   it.next(function (err, key, value) {
     t.is(err.message, 'from underlying iterator')
@@ -500,7 +502,7 @@ test('iterator forwards next() error from underlying iterator', function (t) {
 test('iterator forwards end() to underlying iterator', function (t) {
   t.plan(2)
 
-  var down = {
+  const down = {
     iterator: function () {
       return {
         end: function (callback) {
@@ -511,8 +513,8 @@ test('iterator forwards end() to underlying iterator', function (t) {
     }
   }
 
-  var db = encdown(down)
-  var it = db.iterator()
+  const db = encdown(down)
+  const it = db.iterator()
 
   it.end(function () {
     t.pass('called')
@@ -522,7 +524,7 @@ test('iterator forwards end() to underlying iterator', function (t) {
 test('iterator catches decoding error from keyEncoding', function (t) {
   t.plan(5)
 
-  var down = {
+  const down = {
     iterator: function () {
       return {
         next: function (callback) {
@@ -532,7 +534,7 @@ test('iterator catches decoding error from keyEncoding', function (t) {
     }
   }
 
-  var db = encdown(down, {
+  const db = encdown(down, {
     keyEncoding: {
       decode: function (key) {
         t.is(key, 'key')
@@ -552,7 +554,7 @@ test('iterator catches decoding error from keyEncoding', function (t) {
 test('iterator catches decoding error from valueEncoding', function (t) {
   t.plan(5)
 
-  var down = {
+  const down = {
     iterator: function () {
       return {
         next: function (callback) {
@@ -562,7 +564,7 @@ test('iterator catches decoding error from valueEncoding', function (t) {
     }
   }
 
-  var db = encdown(down, {
+  const db = encdown(down, {
     valueEncoding: {
       decode: function (value) {
         t.is(value, 'value')
@@ -596,7 +598,7 @@ test('proxies compactRange() if it exists', function (t) {
 })
 
 test('encodes start and end of approximateSize()', function (t) {
-  var db = encdown({
+  const db = encdown({
     approximateSize: function (start, end) {
       t.is(start, '1')
       t.is(end, '2')
@@ -608,7 +610,7 @@ test('encodes start and end of approximateSize()', function (t) {
 })
 
 test('encodes start and end of compactRange()', function (t) {
-  var db = encdown({
+  const db = encdown({
     compactRange: function (start, end) {
       t.is(start, '1')
       t.is(end, '2')
@@ -620,7 +622,7 @@ test('encodes start and end of compactRange()', function (t) {
 })
 
 test('encodes start and end of approximateSize() with custom encoding', function (t) {
-  var db = encdown({
+  const db = encdown({
     approximateSize: function (start, end) {
       t.is(start, '"a"')
       t.is(end, '"b"')
@@ -632,7 +634,7 @@ test('encodes start and end of approximateSize() with custom encoding', function
 })
 
 test('encodes start and end of compactRange() with custom encoding', function (t) {
-  var db = encdown({
+  const db = encdown({
     compactRange: function (start, end) {
       t.is(start, '"a"')
       t.is(end, '"b"')
@@ -646,7 +648,7 @@ test('encodes start and end of compactRange() with custom encoding', function (t
 test('encodes seek target', function (t) {
   t.plan(1)
 
-  var db = encdown({
+  const db = encdown({
     iterator: function () {
       return {
         seek: function (target) {
@@ -662,8 +664,8 @@ test('encodes seek target', function (t) {
 test('encodes seek target with custom encoding', function (t) {
   t.plan(1)
 
-  var targets = []
-  var db = encdown({
+  const targets = []
+  const db = encdown({
     iterator: function () {
       return {
         seek: function (target) {
@@ -682,8 +684,8 @@ test('encodes seek target with custom encoding', function (t) {
 test('encodes nullish seek target', function (t) {
   t.plan(1)
 
-  var targets = []
-  var db = encdown({
+  const targets = []
+  const db = encdown({
     iterator: function () {
       return {
         seek: function (target) {
@@ -704,7 +706,7 @@ test('encodes nullish seek target', function (t) {
 test('clear() forwards default options', function (t) {
   t.plan(3)
 
-  var down = {
+  const down = {
     clear: function (options, callback) {
       t.is(options.reverse, false)
       t.is(options.limit, -1)
@@ -718,7 +720,7 @@ test('clear() forwards default options', function (t) {
 test('clear() forwards error from underlying store', function (t) {
   t.plan(1)
 
-  var down = {
+  const down = {
     clear: function (options, cb) {
       process.nextTick(cb, new Error('error from store'))
     }
@@ -732,14 +734,14 @@ test('clear() forwards error from underlying store', function (t) {
 test('clear() encodes range options', function (t) {
   t.plan(5)
 
-  var keyEncoding = {
+  const keyEncoding = {
     encode: function (key) {
       return 'encoded_' + key
     },
     buffer: false
   }
 
-  var db = encdown({
+  const db = encdown({
     clear: function (options) {
       t.is(options.gt, 'encoded_1')
       t.is(options.gte, 'encoded_2')

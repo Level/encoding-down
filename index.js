@@ -1,20 +1,20 @@
 'use strict'
 
-var AbstractLevelDOWN = require('abstract-leveldown').AbstractLevelDOWN
-var AbstractChainedBatch = require('abstract-leveldown').AbstractChainedBatch
-var AbstractIterator = require('abstract-leveldown').AbstractIterator
-var inherits = require('inherits')
-var Codec = require('level-codec')
-var EncodingError = require('level-errors').EncodingError
-var rangeMethods = ['approximateSize', 'compactRange']
+const AbstractLevelDOWN = require('abstract-leveldown').AbstractLevelDOWN
+const AbstractChainedBatch = require('abstract-leveldown').AbstractChainedBatch
+const AbstractIterator = require('abstract-leveldown').AbstractIterator
+const inherits = require('inherits')
+const Codec = require('level-codec')
+const EncodingError = require('level-errors').EncodingError
+const rangeMethods = ['approximateSize', 'compactRange']
 
 module.exports = DB.default = DB
 
 function DB (db, opts) {
   if (!(this instanceof DB)) return new DB(db, opts)
 
-  var manifest = db.supports || {}
-  var additionalMethods = manifest.additionalMethods || {}
+  const manifest = db.supports || {}
+  const additionalMethods = manifest.additionalMethods || {}
 
   AbstractLevelDOWN.call(this, manifest)
 
@@ -23,7 +23,7 @@ function DB (db, opts) {
 
   rangeMethods.forEach(function (m) {
     // TODO (future major): remove this fallback
-    var fallback = typeof db[m] === 'function'
+    const fallback = typeof db[m] === 'function'
 
     if (additionalMethods[m] || fallback) {
       this.supports.additionalMethods[m] = true
@@ -68,16 +68,18 @@ DB.prototype._put = function (key, value, opts, cb) {
 }
 
 DB.prototype._get = function (key, opts, cb) {
-  var self = this
   key = this.codec.encodeKey(key, opts)
   opts.asBuffer = this.codec.valueAsBuffer(opts)
-  this.db.get(key, opts, function (err, value) {
+
+  this.db.get(key, opts, (err, value) => {
     if (err) return cb(err)
+
     try {
-      value = self.codec.decodeValue(value, opts)
+      value = this.codec.decodeValue(value, opts)
     } catch (err) {
       return cb(new EncodingError(err))
     }
+
     cb(null, value)
   })
 }
@@ -119,24 +121,25 @@ function Iterator (db, opts) {
 inherits(Iterator, AbstractIterator)
 
 Iterator.prototype._next = function (cb) {
-  var self = this
-  this.it.next(function (err, key, value) {
+  this.it.next((err, key, value) => {
     if (err) return cb(err)
+
     try {
-      if (self.keys && typeof key !== 'undefined') {
-        key = self.codec.decodeKey(key, self.opts)
+      if (this.keys && typeof key !== 'undefined') {
+        key = this.codec.decodeKey(key, this.opts)
       } else {
         key = undefined
       }
 
-      if (self.values && typeof value !== 'undefined') {
-        value = self.codec.decodeValue(value, self.opts)
+      if (this.values && typeof value !== 'undefined') {
+        value = this.codec.decodeValue(value, this.opts)
       } else {
         value = undefined
       }
     } catch (err) {
       return cb(new EncodingError(err))
     }
+
     cb(null, key, value)
   })
 }

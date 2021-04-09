@@ -7,4 +7,3 @@ updates:
     ignore:
       - dependency-name: dependency-check
       - dependency-name: nyc
-      - dependency-name: standard
