@@ -12,10 +12,10 @@
     "prepublishOnly": "npm run dependency-check"
   },
   "dependencies": {
-    "abstract-leveldown": "^6.2.1",
+    "abstract-leveldown": "^7.0.0",
     "inherits": "^2.0.3",
-    "level-codec": "^9.0.0",
-    "level-errors": "^2.0.0"
+    "level-codec": "^10.0.0",
+    "level-errors": "^3.0.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",

@@ -404,7 +404,7 @@ test('iterator skips values if options.values is false', function (t) {
 })
 
 test('iterator encodes range options', function (t) {
-  t.plan(7)
+  t.plan(5)
 
   const keyEncoding = {
     encode: function (key) {
@@ -415,8 +415,6 @@ test('iterator encodes range options', function (t) {
 
   const db = encdown({
     iterator: function (options) {
-      t.is(options.start, 'encoded_1')
-      t.is(options.end, 'encoded_2')
       t.is(options.gt, 'encoded_3')
       t.is(options.gte, 'encoded_4')
       t.is(options.lt, 'encoded_5')
@@ -425,7 +423,7 @@ test('iterator encodes range options', function (t) {
     }
   }, { keyEncoding })
 
-  db.iterator({ start: 1, end: 2, gt: 3, gte: 4, lt: 5, lte: 6, foo: 7 })
+  db.iterator({ gt: 3, gte: 4, lt: 5, lte: 6, foo: 7 })
 })
 
 test('iterator does not strip nullish range options', function (t) {
