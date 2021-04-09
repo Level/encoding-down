@@ -1,7 +1,7 @@
 {
   "name": "encoding-down",
   "version": "6.3.0",
-  "description": "LevelDOWN wrapper supporting levelup@1 encodings",
+  "description": "An abstract-leveldown implementation that wraps another store to encode keys and values",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,13 @@
     "dependency-check": "dependency-check . test/*.js",
     "prepublishOnly": "npm run dependency-check"
   },
+  "files": [
+    "index.js",
+    "CHANGELOG.md",
+    "CONTRIBUTORS.md",
+    "LICENSE.md",
+    "UPGRADING.md"
+  ],
   "dependencies": {
     "abstract-leveldown": "^7.0.0",
     "inherits": "^2.0.3",
