@@ -8,7 +8,7 @@ const Codec = require('level-codec')
 const EncodingError = require('level-errors').EncodingError
 const rangeMethods = ['approximateSize', 'compactRange']
 
-module.exports = DB.default = DB
+module.exports = DB
 
 function DB (db, opts) {
   if (!(this instanceof DB)) return new DB(db, opts)
