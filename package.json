@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "standard && hallmark && nyc node test",
+    "test-browsers-local": "airtap --coverage test/index.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "hallmark": "hallmark --fix",
     "dependency-check": "dependency-check . test/*.js",
@@ -18,6 +19,8 @@
     "level-errors": "^3.0.0"
   },
   "devDependencies": {
+    "airtap": "^4.0.3",
+    "airtap-playwright": "^1.0.1",
     "coveralls": "^3.0.2",
     "dependency-check": "^3.3.0",
     "hallmark": "^3.1.0",
