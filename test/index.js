@@ -2,11 +2,32 @@
 
 const test = require('tape')
 const encdown = require('..')
+const suite = require('abstract-leveldown/test')
 const memdown = require('memdown')
 const Buffer = require('buffer').Buffer
 const hasOwnProperty = Object.prototype.hasOwnProperty
 const noop = function () {}
 
+const testCommon = suite.common({
+  test: test,
+  factory: function () {
+    return encdown(memdown())
+  },
+
+  encodings: true,
+
+  // Unsupported features
+  createIfMissing: false,
+  errorIfExists: false,
+
+  // Opt-in to new tests
+  clear: true
+})
+
+// Test abstract-leveldown compliance
+suite(testCommon)
+
+// Custom tests
 test('opens and closes the underlying db', function (t) {
   const _db = {
     open: function (opts, cb) {
