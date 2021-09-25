@@ -84,6 +84,32 @@ DB.prototype._get = function (key, opts, cb) {
   })
 }
 
+DB.prototype._getMany = function (keys, opts, cb) {
+  keys = keys.map((key) => this.codec.encodeKey(key, opts))
+  opts.asBuffer = this.codec.valueAsBuffer(opts)
+
+  this.db.getMany(keys, opts, (err, values) => {
+    if (err) return cb(err)
+
+    const decoded = new Array(values.length)
+
+    for (let i = 0; i < values.length; i++) {
+      if (values[i] === undefined) {
+        decoded[i] = undefined
+        continue
+      }
+
+      try {
+        decoded[i] = this.codec.decodeValue(values[i], opts)
+      } catch (err) {
+        return cb(new EncodingError(err))
+      }
+    }
+
+    cb(null, decoded)
+  })
+}
+
 DB.prototype._del = function (key, opts, cb) {
   key = this.codec.encodeKey(key, opts)
   this.db.del(key, opts, cb)
