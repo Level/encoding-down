@@ -1,5 +1,11 @@
 # Changelog
 
+## [7.1.0] - 2021-09-30
+
+### Added
+
+- Add `db.getMany(keys)` ([#102](https://github.com/Level/encoding-down/issues/102)) ([`4038a30`](https://github.com/Level/encoding-down/commit/4038a30)) (Vincent Weevers).
+
 ## [7.0.0] - 2021-04-09
 
 _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
@@ -342,9 +348,11 @@ _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 
 - Version bump ([**@juliangruber**](https://github.com/juliangruber))
 
-## 1.0.0 - 2017-01-26
+## [1.0.0] - 2017-01-26
 
 :seedling: Initial release.
+
+[7.1.0]: https://github.com/Level/encoding-down/releases/tag/v7.1.0
 
 [7.0.0]: https://github.com/Level/encoding-down/releases/tag/v7.0.0
 
@@ -421,3 +429,5 @@ _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 [2.0.1]: https://github.com/Level/encoding-down/releases/tag/v2.0.1
 
 [2.0.0]: https://github.com/Level/encoding-down/releases/tag/v2.0.0
+
+[1.0.0]: https://github.com/Level/encoding-down/releases/tag/v1.0.0
