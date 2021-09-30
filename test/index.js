@@ -2,11 +2,33 @@
 
 const test = require('tape')
 const encdown = require('..')
+const suite = require('abstract-leveldown/test')
 const memdown = require('memdown')
 const Buffer = require('buffer').Buffer
 const hasOwnProperty = Object.prototype.hasOwnProperty
 const noop = function () {}
 
+const testCommon = suite.common({
+  test: test,
+  factory: function () {
+    return encdown(memdown())
+  },
+
+  encodings: true,
+
+  // Unsupported features
+  createIfMissing: false,
+  errorIfExists: false,
+
+  // Opt-in to new tests
+  clear: true,
+  getMany: true
+})
+
+// Test abstract-leveldown compliance
+suite(testCommon)
+
+// Custom tests
 test('opens and closes the underlying db', function (t) {
   const _db = {
     open: function (opts, cb) {
@@ -173,6 +195,64 @@ test('get() forwards error from underlying store', function (t) {
 
   encdown(down).get('key', function (err) {
     t.is(err.message, 'error from store')
+  })
+})
+
+test('getMany() skips decoding not-found values', function (t) {
+  t.plan(6)
+
+  const valueEncoding = {
+    encode: JSON.stringify,
+    decode (value) {
+      t.is(value, JSON.stringify(data))
+      return JSON.parse(value)
+    },
+    buffer: false,
+    type: 'test'
+  }
+
+  const data = { beep: 'boop' }
+  const db = encdown(memdown(), { valueEncoding })
+
+  db.open(function (err) {
+    t.error(err, 'no open() error')
+
+    db.put('foo', data, function (err) {
+      t.error(err, 'no put() error')
+
+      db.getMany(['foo', 'bar'], function (err, values) {
+        t.error(err, 'no getMany() error')
+        t.same(values, [data, undefined])
+
+        db.close(t.error.bind(t))
+      })
+    })
+  })
+})
+
+test('getMany() forwards decode error', function (t) {
+  const valueEncoding = {
+    encode: (v) => v,
+    decode: (v) => { throw new Error('decode error') },
+    buffer: false,
+    type: 'test'
+  }
+
+  const db = encdown(memdown(), { valueEncoding })
+
+  db.open(function (err) {
+    t.error(err, 'no open() error')
+
+    db.put('foo', 'bar', function (err) {
+      t.error(err, 'no put() error')
+
+      db.getMany(['foo'], function (err, values) {
+        t.is(err && err.message, 'decode error')
+        t.is(values, undefined)
+
+        db.close(t.end.bind(t))
+      })
+    })
   })
 })
 
