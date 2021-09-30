@@ -3,14 +3,13 @@
 > An [`abstract-leveldown`][abstract-leveldown] implementation that wraps another store to encode keys and values.
 
 [![level badge][level-badge]](https://github.com/Level/awesome)
-[![npm](https://img.shields.io/npm/v/encoding-down.svg?label=&logo=npm)](https://www.npmjs.com/package/encoding-down)
+[![npm](https://img.shields.io/npm/v/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
 [![Node version](https://img.shields.io/node/v/encoding-down.svg)](https://www.npmjs.com/package/encoding-down)
-[![Test](https://github.com/Level/encoding-down/actions/workflows/test.yml/badge.svg)](https://github.com/Level/encoding-down/actions/workflows/test.yml)
-[![Coverage Status](https://codecov.io/gh/Level/encoding-down/branch/master/graph/badge.svg)](https://codecov.io/gh/Level/encoding-down)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![npm](https://img.shields.io/npm/dm/encoding-down.svg?label=dl)](https://www.npmjs.com/package/encoding-down)
-[![Backers on Open Collective](https://opencollective.com/level/backers/badge.svg?color=orange)](#backers)
-[![Sponsors on Open Collective](https://opencollective.com/level/sponsors/badge.svg?color=orange)](#sponsors)
+[![Test](https://img.shields.io/github/workflow/status/Level/encoding-down/Test?label=test)](https://github.com/Level/encoding-down/actions/workflows/test.yml)
+[![Coverage](https://img.shields.io/codecov/c/github/Level/encoding-down?label=&logo=codecov&logoColor=fff)](https://codecov.io/gh/Level/encoding-down)
+[![Standard](https://img.shields.io/badge/standard-informational?logo=javascript&logoColor=fff)](https://standardjs.com)
+[![Common Changelog](https://common-changelog.org/badge.svg)](https://common-changelog.org)
+[![Donate](https://img.shields.io/badge/donate-orange?logo=open-collective&logoColor=fff)](https://opencollective.com/level)
 
 ## Introduction
 
@@ -23,11 +22,11 @@ Stores like [`leveldown`][leveldown] can only store strings and Buffers. Other t
 Without any options, `encoding-down` defaults to the `utf8` encoding.
 
 ```js
-var levelup = require('levelup')
-var leveldown = require('leveldown')
-var encode = require('encoding-down')
+const levelup = require('levelup')
+const leveldown = require('leveldown')
+const encode = require('encoding-down')
 
-var db = levelup(encode(leveldown('./db1')))
+const db = levelup(encode(leveldown('./db1')))
 
 db.put('example', Buffer.from('encoding-down'), function (err) {
   db.get('example', function (err, value) {
@@ -39,7 +38,7 @@ db.put('example', Buffer.from('encoding-down'), function (err) {
 Can we store objects? Yes!
 
 ```js
-var db = levelup(encode(leveldown('./db2'), { valueEncoding: 'json' }))
+const db = levelup(encode(leveldown('./db2'), { valueEncoding: 'json' }))
 
 db.put('example', { awesome: true }, function (err) {
   db.get('example', function (err, value) {
@@ -52,7 +51,7 @@ db.put('example', { awesome: true }, function (err) {
 How about storing Buffers, but getting back a hex-encoded string?
 
 ```js
-var db = levelup(encode(leveldown('./db3'), { valueEncoding: 'hex' }))
+const db = levelup(encode(leveldown('./db3'), { valueEncoding: 'hex' }))
 
 db.put('example', Buffer.from([0, 255]), function (err) {
   db.get('example', function (err, value) {
@@ -64,7 +63,7 @@ db.put('example', Buffer.from([0, 255]), function (err) {
 What if we previously stored binary data?
 
 ```js
-var db = levelup(encode(leveldown('./db4'), { valueEncoding: 'binary' }))
+const db = levelup(encode(leveldown('./db4'), { valueEncoding: 'binary' }))
 
 db.put('example', Buffer.from([0, 255]), function (err) {
   db.get('example', function (err, value) {
@@ -81,7 +80,7 @@ db.put('example', Buffer.from([0, 255]), function (err) {
 And what about keys?
 
 ```js
-var db = levelup(encode(leveldown('./db5'), { keyEncoding: 'json' }))
+const db = levelup(encode(leveldown('./db5'), { keyEncoding: 'json' }))
 
 db.put({ awesome: true }, 'example', function (err) {
   db.get({ awesome: true }, function (err, value) {
@@ -91,7 +90,7 @@ db.put({ awesome: true }, 'example', function (err) {
 ```
 
 ```js
-var db = levelup(encode(leveldown('./db6'), { keyEncoding: 'binary' }))
+const db = levelup(encode(leveldown('./db6'), { keyEncoding: 'binary' }))
 
 db.put(Buffer.from([0, 255]), 'example', function (err) {
   db.get('00ff', { keyEncoding: 'hex' }, function (err, value) {
@@ -105,8 +104,8 @@ db.put(Buffer.from([0, 255]), 'example', function (err) {
 The [`level`][level] module conveniently bundles `encoding-down` and passes its `options` to `encoding-down`. This means you can simply do:
 
 ```js
-var level = require('level')
-var db = level('./db7', { valueEncoding: 'json' })
+const level = require('level')
+const db = level('./db7', { valueEncoding: 'json' })
 
 db.put('example', 42, function (err) {
   db.get('example', function (err, value) {
@@ -132,11 +131,11 @@ Both encodings default to `'utf8'`. They can be a string (builtin `level-codec` 
 Please refer to [`level-codec` documentation][encoding-format] for a precise description of the format. Here's a quick example with `level` and `async/await` just for fun:
 
 ```js
-var level = require('level')
-var lexint = require('lexicographic-integer')
+const level = require('level')
+const lexint = require('lexicographic-integer')
 
 async function main () {
-  var db = level('./db8', {
+  const db = level('./db8', {
     keyEncoding: {
       type: 'lexicographic-integer',
       encode: (n) => lexint.pack(n, 'hex'),
@@ -158,10 +157,10 @@ main()
 With an npm-installed encoding (modularity ftw!) we can reduce the above to:
 
 ```js
-var level = require('level')
-var lexint = require('lexicographic-integer-encoding')('hex')
+const level = require('level')
+const lexint = require('lexicographic-integer-encoding')('hex')
 
-var db = level('./db8', {
+const db = level('./db8', {
   keyEncoding: lexint
 })
 ```
@@ -176,19 +175,11 @@ See the [Contribution Guide](https://github.com/Level/community/blob/master/CONT
 
 ## Donate
 
-To sustain [`Level`](https://github.com/Level) and its activities, become a backer or sponsor on [Open Collective](https://opencollective.com/level). Your logo or avatar will be displayed on our 28+ [GitHub repositories](https://github.com/Level) and [npm](https://www.npmjs.com/) packages. 💖
-
-### Backers
-
-[![Open Collective backers](https://opencollective.com/level/backers.svg?width=890)](https://opencollective.com/level)
-
-### Sponsors
-
-[![Open Collective sponsors](https://opencollective.com/level/sponsors.svg?width=890)](https://opencollective.com/level)
+Support us with a monthly donation on [Open Collective](https://opencollective.com/level) and help us continue our work.
 
 ## License
 
-[MIT](LICENSE.md) © 2012-present [Contributors](CONTRIBUTORS.md).
+[MIT](LICENSE)
 
 [level-badge]: https://leveljs.org/img/badge.svg
 
