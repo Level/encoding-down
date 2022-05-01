@@ -30,7 +30,7 @@
     "hallmark": "^4.0.0",
     "memdown": "^6.1.0",
     "nyc": "^15.1.0",
-    "standard": "^16.0.3",
+    "standard": "^17.0.0",
     "tape": "^5.0.1"
   },
   "repository": "Level/encoding-down",
